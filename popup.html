@@ -1,0 +1,20 @@
+<head>
+  <title>OAuth 2.0 Popup</title>
+  <script src="js/jquery-1.11.1.min.js"></script>
+	<script src="oauth2/oauth2.js"></script>
+	<script src="test/test4.js"></script>
+  
+	<style type="text/css">
+		div#success{width:300px}
+
+    #success { display: none; }
+  </style>
+</head>
+
+<form id="form">
+  <input id="button" type="submit" value="lalala"/>
+</form>
+<div id="success">
+  Successfully get the auth token:<span id="taskid"></span>.
+</div>
+<script src="https://apis.google.com/js/client.js?onload=google.authorize"></script>

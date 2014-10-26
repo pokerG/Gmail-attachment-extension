@@ -1,3 +1,8 @@
+/**
+ * 向邮件插入搜索附件的按钮
+ * @param  {[DOM Element]} parent [新建邮件的div或document]
+ * @return {[DOM Element]}        [插入的按钮]
+ */
 function insert_btn(parent) {
 	toolbar = parent.querySelector(".pXSFsb"); //邮件的附件,图片工具栏
 	if (toolbar == null) {
@@ -7,13 +12,12 @@ function insert_btn(parent) {
 	node = toolbar.children[0];
 	if (node.childElementCount == 5) { //判断是否已添加Btn
 		var element = document.createElement("button");
-		element.setAttribute("name", "generate_btn");
-		element.setAttribute("id", "test_btn");
-		element.setAttribute("class", "btn")
-		element.innerText = "test";
+		element.setAttribute("name", "attachBtn");
+		element.setAttribute("id", "ab");
+		element.setAttribute("class", "atB")
+		element.innerText = "attach";
 		node.appendChild(element);
-		state = true;
-		element.onclick = "test()";
+		element.addEventListener("click",openFileBrowser,false);
 		return element;
 	}
 }
@@ -23,14 +27,22 @@ document.onmousemove = function() {
 	if (reply != null) {
 		if (document.activeElement.className == reply.className) {
 			insert_btn(document);
+			
 		}
 	}
 	for (var i = 0; i < newemail.length; i++) {
 		insert_btn(newemail[i]);
+		// document.getElementById('ab').addEventListener("click", test, false);
 	}
+
 }
 
 
-function test() {
-	console.log("hello");
+function openFileBrowser(e){
+	// t = e.target;
+
+	// window.open('test.html');
 }
+
+
+
