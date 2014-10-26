@@ -1,11 +1,11 @@
 <head>
   <title>OAuth 2.0 Popup</title>
   <script src="js/jquery-1.11.1.min.js"></script>
-	<script src="oauth2/oauth2.js"></script>
-	<script src="test/test4.js"></script>
+  <script src="oauth2/oauth2.js"></script>
+  <script src="js/oauth.js"></script>
   
-	<style type="text/css">
-		div#success{width:300px}
+  <style type="text/css">
+    div#success{width:300px}
 
     #success { display: none; }
   </style>
@@ -18,3 +18,4 @@
   Successfully get the auth token:<span id="taskid"></span>.
 </div>
 <script src="https://apis.google.com/js/client.js?onload=google.authorize"></script>
+<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>

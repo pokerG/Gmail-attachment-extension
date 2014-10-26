@@ -4,7 +4,7 @@
     "version": "1.0",
     "description": "管理你的gmail附件",
 
-    "page_action": {  
+    "page_action": {  //Oauth认证
         "default_icon": "images/mail_open.png" ,
         "default_title" : "Gmail Attachment Management",
         "default_popup": "popup.html"
@@ -33,6 +33,8 @@
             "run_at": "document_start"
         }
     ],
+
+    "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
 
     "web_accessible_resources": [
          "oauth2/oauth2.html"

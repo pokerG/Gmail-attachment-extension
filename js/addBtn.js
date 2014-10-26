@@ -40,7 +40,7 @@ document.onmousemove = function() {
 
 function openFileBrowser(e){
 	// t = e.target;
-
+	fetchList();
 	// window.open('test.html');
 }
 
