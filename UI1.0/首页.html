@@ -1,0 +1,362 @@
+<HTML>
+	<HEAD>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<meta http-equiv="imagetoolbar" content="no">
+		<link href="resources/css/jquery-ui-themes.css" type="text/css"
+			rel="stylesheet">
+		<link href="resources/css/axure_rp_page.css" type="text/css"
+			rel="stylesheet">
+		<link href="首页_files/axurerp_pagespecificstyles.css" type="text/css"
+			rel="stylesheet">
+		<SCRIPT src="resources/scripts/jquery-1.4.2.min.js"></SCRIPT>
+		<SCRIPT src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></SCRIPT>
+		<SCRIPT src="resources/scripts/axurerp_beforepagescript.js"></SCRIPT>
+		<SCRIPT src="resources/scripts/messagecenter.js"></SCRIPT>
+		<script LANGUAGE="Jscript">
+function info() {
+	var obj = document.getElementById('u4');
+	var index = obj.selectedIndex;
+	return obj.options[index];
+}
+function list() {
+	var obj = document.getElementById('u4');
+	obj.innerHTML = "";
+	var a, b;
+	a = new Array(10);
+	for ( var i = 0; i < 10; i++) {
+		a[i] = "<OPTION>附件" + i + "名称</OPTION>";
+	}
+	b = a.join();
+	obj.innerHTML = "<SELECT ID='selUpdate'>" + b + "</SELECT>";
+}
+function add(opt) {
+	var obj = document.getElementById('u3');
+	obj.options.add(new Option(opt.value, opt.text));
+}
+function del() {
+	var obj = document.getElementById('u3');
+	var index = obj.selectedIndex;
+	obj.options.remove(index);
+}
+</script>
+	</HEAD>
+	<BODY>
+		<DIV class="main_container">
+
+			<DIV id=u0
+				style="position: absolute; left: 350px; top: 180px; width: 201px; height: 201px;; overflow: hidden;">
+				<DIV id=pd0u0
+					style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px;">
+				</DIV>
+			</DIV>
+			<DIV id=u1
+				style="position: absolute; left: 100px; top: 80px; width: 501px; height: 401px;; overflow: hidden;">
+				<DIV id=pd0u1
+					style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px;">
+					<DIV id=u2 class="u2">
+						<DIV id=u2_rtf>
+							<p style="text-align: center;">
+								<span
+									style="font-family: 微软雅黑; font-size: 16px; font-weight: bold; font-style: normal; text-decoration: none; color: #333333;">附件信息</span>
+							</p>
+						</DIV>
+					</DIV>
+					<SELECT id=u3 size=2 class="u3">
+					</SELECT>
+
+					<SELECT id=u4 size=2 class="u4">
+					</SELECT>
+
+					<DIV id=u5 class="u5">
+						<DIV id=u5_rtf>
+							<p style="text-align: center;">
+								<span
+									style="font-family: 微软雅黑; font-size: 16px; font-weight: bold; font-style: normal; text-decoration: none; color: #333333;">选中附件</span>
+							</p>
+						</DIV>
+					</DIV>
+					<DIV id=u6 class="treeroot"
+						style="position: absolute; left: 26px; top: 10px; width: 97px; height: 85px; overflow: visible;">
+						<script type="text/javascript">
+var currentSelectedu6 = new Object();
+</script>
+
+						<DIV id=cncu6
+							style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; overflow: visible;">
+
+							<DIV id=tnu7
+								style="position: absolute; left: 0px; top: 0px; width: 92px; height: 20px; overflow: visible;">
+
+								<script type="text/javascript">
+var Jsonu8_selected = {
+	"imgclass" : "u8_selected"
+};</script>
+
+								<DIV id=u8_container class="u8_container">
+									<DIV id="u8_img" class="u8_original"></DIV>
+									<DIV id=u9 class="u9">
+										<DIV id=u9_rtf>
+											&nbsp;
+										</DIV>
+									</DIV>
+								</DIV>
+
+								<script type="text/javascript">
+$('#u8_img').removeClass('u8_original').addClass('u8_selected');
+</script>
+
+								<DIV id=u10_container class="u10_container">
+									<DIV id="u10_img" class="u10_original"></DIV>
+									<DIV id=u11 class="u11">
+										<DIV id=u11_rtf>
+											<p style="text-align: left;">
+												<span
+													style="font-family: 微软雅黑; font-size: 16px; font-weight: bold; font-style: normal; text-decoration: none; color: #333333;">附件来源</span>
+											</p>
+										</DIV>
+									</DIV>
+								</DIV>
+
+								<script type="text/javascript">
+InitializeTreeNode('tnu7', 'u8', 'cncu7',
+		"SelectTreeNode(currentSelectedu6, false, 'u10', 'u11');");
+</script>
+
+								<DIV id=cncu7
+									style="position: absolute; left: 0px; top: 0px; width: 1px; height: 1px; overflow: visible;">
+
+									<DIV id=tnu12
+										style="position: absolute; left: 20px; top: 20px; width: 67px; height: 20px; overflow: visible;">
+
+										<script type="text/javascript">
+var Jsonu13_hover = {
+	"imgclass" : "u13_hover"
+};
+var Jsonu13_selected = {
+	"color" : "#FF0000",
+	"fontWeight" : "normal",
+	"imgclass" : "u13_selected"
+};</script>
+
+										<DIV id=u13_container class="u13_container">
+											<DIV id="u13_img" class="u13_original"></DIV>
+											<DIV id=u14 class="u14">
+												<DIV id=u14_rtf>
+													<p style="text-align: left;">
+														<span
+															style="font-family: 微软雅黑; font-size: 13px; font-weight: normal; font-style: normal; text-decoration: none; color: #333333;">收件箱</span>
+													</p>
+												</DIV>
+											</DIV>
+										</DIV>
+										<IMG id=u13 src="resources/images/transparent.gif" class="u13"
+											onmouseover="SetWidgetHover('u13',false);"
+											onmouseout="SetWidgetNotHover('u13',false);">
+
+									</DIV>
+									<IMG id=u12 src="resources/images/transparent.gif"
+										style="position: absolute; left: 42px; top: 20px; width: 45px; height: 20px"
+										onmouseover="SetWidgetHover('u13',false);"
+										onmouseout="SetWidgetNotHover('u13',false);"
+										onclick="SelectTreeNode(currentSelectedu6, true, 'u13', 'u14');list();">
+
+									<DIV id=tnu15
+										style="position: absolute; left: 20px; top: 40px; width: 67px; height: 20px; overflow: visible;">
+
+										<script type="text/javascript">
+var Jsonu16_hover = {
+	"imgclass" : "u16_hover"
+};
+var Jsonu16_selected = {
+	"color" : "#FF0000",
+	"fontWeight" : "normal",
+	"imgclass" : "u16_selected"
+};</script>
+
+										<DIV id=u16_container class="u16_container">
+											<DIV id="u16_img" class="u16_original"></DIV>
+											<DIV id=u17 class="u17">
+												<DIV id=u17_rtf>
+													<p style="text-align: left;">
+														<span
+															style="font-family: 微软雅黑; font-size: 13px; font-weight: normal; font-style: normal; text-decoration: none; color: #333333;">发件箱</span>
+													</p>
+												</DIV>
+											</DIV>
+										</DIV>
+										<IMG id=u16 src="resources/images/transparent.gif" class="u16"
+											onmouseover="SetWidgetHover('u16',false);"
+											onmouseout="SetWidgetNotHover('u16',false);">
+
+									</DIV>
+									<IMG id=u15 src="resources/images/transparent.gif"
+										style="position: absolute; left: 42px; top: 40px; width: 45px; height: 20px"
+										onmouseover="SetWidgetHover('u16',false);"
+										onmouseout="SetWidgetNotHover('u16',false);"
+										onclick="SelectTreeNode(currentSelectedu6, true, 'u16', 'u17');list();">
+
+									<DIV id=tnu18
+										style="position: absolute; left: 20px; top: 60px; width: 67px; height: 20px; overflow: visible;">
+
+										<script type="text/javascript">
+var Jsonu19_hover = {
+	"imgclass" : "u19_hover"
+};
+var Jsonu19_selected = {
+	"color" : "#FF0000",
+	"fontWeight" : "normal",
+	"imgclass" : "u19_selected"
+};</script>
+
+										<DIV id=u19_container class="u19_container">
+											<DIV id="u19_img" class="u19_original"></DIV>
+											<DIV id=u20 class="u20">
+												<DIV id=u20_rtf>
+													<p style="text-align: left;">
+														<span
+															style="font-family: 微软雅黑; font-size: 13px; font-weight: normal; font-style: normal; text-decoration: none; color: #333333;">垃圾箱</span>
+													</p>
+												</DIV>
+											</DIV>
+										</DIV>
+										<IMG id=u19 src="resources/images/transparent.gif" class="u19"
+											onmouseover="SetWidgetHover('u19',false);"
+											onmouseout="SetWidgetNotHover('u19',false);">
+
+									</DIV>
+									<IMG id=u18 src="resources/images/transparent.gif"
+										style="position: absolute; left: 42px; top: 60px; width: 45px; height: 20px"
+										onmouseover="SetWidgetHover('u19',false);"
+										onmouseout="SetWidgetNotHover('u19',false);"
+										onclick="SelectTreeNode(currentSelectedu6, true, 'u19', 'u20');list();">
+
+								</DIV>
+							</DIV>
+							<IMG id=u7 src="resources/images/transparent.gif"
+								style="position: absolute; left: 22px; top: 0px; width: 70px; height: 20px"
+								onclick="SelectTreeNode(currentSelectedu6, false, 'u10', 'u11');">
+
+						</DIV>
+					</DIV>
+					<INPUT id=u21 type=submit class="u21" value="添加该附件" onclick="add(info());">
+
+					<INPUT id=u22 type=submit class="u22" value="删除选中附件" onclick="del();">
+
+					<DIV id=u23 class="u23;">
+
+						<DIV id=u23_table class="u23_table"></DIV>
+
+					</DIV>
+
+					<DIV id=u23container
+						style="position: absolute; left: 180px; top: 40px; width: 305px; height: 135px; overflow: visible">
+
+						<DIV id=u24_container class="u24_container">
+							<DIV id=u25 class="u25">
+								<DIV id=u25_rtf>
+									<p style="text-align: center;">
+										<span
+											style="font-family: 微软雅黑; font-size: 13px; font-weight: normal; font-style: normal; text-decoration: none; color: #333333;">ID</span>
+									</p>
+								</DIV>
+							</DIV>
+						</DIV>
+
+						<DIV id=u26_container class="u26_container">
+							<DIV id=u27 class="u27">
+								<DIV id=u27_rtf>
+									&nbsp;
+								</DIV>
+							</DIV>
+						</DIV>
+
+						<DIV id=u28_container class="u28_container">
+							<DIV id=u29 class="u29">
+								<DIV id=u29_rtf>
+									<p style="text-align: center;">
+										<span
+											style="font-family: 微软雅黑; font-size: 13px; font-weight: normal; font-style: normal; text-decoration: none; color: #333333;">名称</span>
+									</p>
+								</DIV>
+							</DIV>
+						</DIV>
+
+						<DIV id=u30_container class="u30_container">
+							<DIV id=u31 class="u31">
+								<DIV id=u31_rtf>
+									&nbsp;
+								</DIV>
+							</DIV>
+						</DIV>
+
+						<DIV id=u32_container class="u32_container">
+							<DIV id=u33 class="u33">
+								<DIV id=u33_rtf>
+									<p style="text-align: center;">
+										<span
+											style="font-family: 微软雅黑; font-size: 13px; font-weight: normal; font-style: normal; text-decoration: none; color: #333333;">创建日期</span>
+									</p>
+								</DIV>
+							</DIV>
+						</DIV>
+
+						<DIV id=u34_container class="u34_container">
+							<DIV id=u35 class="u35">
+								<DIV id=u35_rtf>
+									&nbsp;
+								</DIV>
+							</DIV>
+						</DIV>
+
+						<DIV id=u36_container class="u36_container">
+							<DIV id=u37 class="u37">
+								<DIV id=u37_rtf>
+									<p style="text-align: center;">
+										<span
+											style="font-family: 微软雅黑; font-size: 13px; font-weight: normal; font-style: normal; text-decoration: none; color: #333333;">来源</span>
+									</p>
+								</DIV>
+							</DIV>
+						</DIV>
+
+						<DIV id=u38_container class="u38_container">
+							<DIV id=u39 class="u39">
+								<DIV id=u39_rtf>
+									&nbsp;
+								</DIV>
+							</DIV>
+						</DIV>
+
+					</DIV>
+					<INPUT id=u40 type=submit class="u40" value="确认">
+
+					<INPUT id=u41 type=text value="要查找的附件..." class="u41">
+
+					<DIV id=u42_container class="u42_container">
+						<DIV id="u42_img" class="u42_original"></DIV>
+						<DIV id=u43 class="u43">
+							<DIV id=u43_rtf>
+							</DIV>
+						</DIV>
+					</DIV>
+
+				</DIV>
+			</DIV>
+		</DIV>
+		<DIV class=preload>
+			<img src="首页_files/u8_selected.png" width="1" height="1" />
+			<img src="首页_files/u8_original.png" width="1" height="1" />
+			<img src="首页_files/u13_hover.png" width="1" height="1" />
+			<img src="首页_files/u13_selected.png" width="1" height="1" />
+			<img src="首页_files/u23_table.png" width="1" height="1" />
+			<img src="首页_files/u24_original.png" width="1" height="1" />
+			<img src="首页_files/u26_original.png" width="1" height="1" />
+			<img src="首页_files/u28_original.png" width="1" height="1" />
+			<img src="首页_files/u30_original.png" width="1" height="1" />
+			<img src="首页_files/u36_original.png" width="1" height="1" />
+			<img src="首页_files/u38_original.png" width="1" height="1" />
+			<img src="首页_files/u42_original.png" width="1" height="1" />
+		</DIV>
+	</BODY>
+	<SCRIPT src="resources/scripts/axurerp_pagescript.js"></SCRIPT>
+	<SCRIPT src="首页_files/axurerp_pagespecificscript.js" charset="utf-8"></SCRIPT>
