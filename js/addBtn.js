@@ -44,6 +44,8 @@ document.onmousemove = function() {
  * @param  {[type]} e [description]
  * @return {[type]}   [description]
  */
+var msgs = new Array();
+
 function openFileBrowser(e) {
 	// t = e.target;
 
@@ -52,6 +54,7 @@ function openFileBrowser(e) {
 	chrome.extension.sendMessage({
 		cmd: "get"
 	}, function(response) {
+		// msgs = response
 		console.log("success");
 		for(var i = 0; i < response.length; i++){
 			console.log(response[i].msgId);

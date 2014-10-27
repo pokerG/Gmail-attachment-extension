@@ -5,61 +5,58 @@ var google = new OAuth2('google', {
 });
 
 google.authorize(function() {
-
-
-
-	var ATTACHMENT_FETCH_URL = 'https://www.googleapis.com/gmail/v1/users/me/messages/MessageId/attachments/AttId';
-
-	var form = document.getElementById('form');
-	var success = document.getElementById('success');
-	var MsgList = null;
-	var token = '';
-
 	// Hook up the form to create a new task with Google Tasks
 	form.addEventListener('submit', function(event) {
 		event.preventDefault();
-
-		fetchList();
+		fetchList(null);
 	});
-
-
-
 });
 
-function fetchList() {
+/**
+ * 获取邮件列表,根据特定条件
+ * @param  {[string]} nextPageToken 下一页邮件列表的token
+ */
+function fetchList(nextPageToken) {
 	var LIST_FETCH_URL = 'https://www.googleapis.com/gmail/v1/users/me/messages';
 	var xhr = new XMLHttpRequest();
 	//var msg = gapi.client.gmail.users.messages.get({"id":list.messages[i].id});
 	xhr.onreadystatechange = function(event) {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-
 				var list = JSON.parse(xhr.responseText);
-				document.getElementById('taskid').innerHTML = '<br />';
-				MsgList = list;
-
 				//Fetch information of the attachments with a for loop
 				for (var i = 0; i < list.messages.length; i++) {
-
 					getMessage(list.messages[i].id);
 				}
+
+				//递归获取
+				/*if(typeof(list.nextPageToken) != "undefined"){
+					fetchList(list.nextPageToken)
+				}*/
 			} else {
-				// Request failure: something bad happened
+				console.log(xhr.status);
 			}
 		}
 	};
-
-	xhr.open('GET', LIST_FETCH_URL, true);
-
+	if(nextPageToken != null){
+		// xhr.open('GET',LIST_FETCH_URL + "?pageToken=" + nextPageToken);	
+	}else{
+		xhr.open('GET', LIST_FETCH_URL, true);
+	}
+	
 	xhr.setRequestHeader('Content-Type', 'application/json');
-	token = google.getAccessToken();
+	var token = google.getAccessToken();
 	xhr.setRequestHeader('Authorization', 'OAuth ' + token);
-
 	xhr.send(null);
 }
 
+
+/**
+ * 获取邮件信息		
+ * @param  {[string]} MessageId [邮件id]
+ */
 function getMessage(MessageId) {
-	var MESSAGE_FETCH_URL_prefix = 'https://www.googleapis.com/gmail/v1/users/me/messages/'; //messageId
+	var MESSAGE_FETCH_URL_PREFIX = 'https://www.googleapis.com/gmail/v1/users/me/messages/'; //messageId
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function(event) {
 		if (xhr.readyState == 4) {
@@ -80,24 +77,50 @@ function getMessage(MessageId) {
 								msgId: messageObj.id,
 								attachId: part.body.attachmentId
 							}, function(response) {});
-
-							console.log(part.body.attachmentId);
+							getAttachment(messageObj.id,part.body.attachmentId);
+							// console.log(part.body.attachmentId);
 						}
-
 					}
 				}
-
-
 			} else {
-				// Request failure: something bad happened
+				console.log(xhr.status);
 			}
 		}
 	};
 
-	xhr.open('GET', MESSAGE_FETCH_URL_prefix + MessageId, true);
-
+	xhr.open('GET', MESSAGE_FETCH_URL_PREFIX + MessageId, true);
 	xhr.setRequestHeader('Content-Type', 'application/json');
+	var token = google.getAccessToken();
 	xhr.setRequestHeader('Authorization', 'OAuth ' + token);
+	xhr.send(null);
+}
 
+/**
+ * 获取附件MIME
+ * @param  {[string]} messageId [邮件id]
+ * @param  {[string]} attchId   [附件id]
+ */
+function getAttachment(messageId,attchId){
+	var ATTACHMENT_FETCH_URL_PREFIX = 'https://www.googleapis.com/gmail/v1/users/me/messages/';
+	var xhr = new XMLHttpRequest();
+
+	xhr.onreadystatechange = function(event) {
+		if (xhr.readyState == 4) {
+			if (xhr.status == 200) {
+				var attchObj = JSON.parse(xhr.responseText);
+				if(typeof(attchObj) != "undefined"){
+					console.log(attchObj);
+				}
+			} else {
+				console.log(xhr.status);
+			}
+		}
+	};	
+
+
+	xhr.open('GET',ATTACHMENT_FETCH_URL_PREFIX + messageId + '/attachments/' + attchId,true);
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	var token = google.getAccessToken();
+	xhr.setRequestHeader('Authorization', 'OAuth ' + token);
 	xhr.send(null);
 }
