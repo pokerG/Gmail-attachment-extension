@@ -18,18 +18,27 @@ chrome.runtime.onInstalled.addListener(function() {
   });
 });
 
+var msgs = new Array(); //附件信息,json数组
+var count = 0;  //附件个数
 
+/**
+ * popup 与 content_scripts 通过background通信
+ * @param  {[json]} message      [{cmd,msgId,attachId}]
+ * @param  {[type]} sender       [description]
+ * @param  {[type]} sendResponse [接受或传递消息成功后的回调函数]
+ */
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   // console.log(message);
   if (message.cmd == "send") {
-    msg = {
+    msgs[count] = {
       msgId: message.msgId,
       attachId: message.attachId
     };
+    count ++;
     console.log(message.msgId);
     console.log(message.attachId);
   } else if (message.cmd == "get") {
-    sendResponse(msg);
+    sendResponse(msgs);
   }
 
 });

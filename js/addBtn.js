@@ -39,16 +39,24 @@ document.onmousemove = function() {
 
 }
 
-
+/**
+ * [openFileBrowser description]
+ * @param  {[type]} e [description]
+ * @return {[type]}   [description]
+ */
 function openFileBrowser(e) {
 	// t = e.target;
 
-	// console.log(ps);
-	// window.open('test.html');
+
+	//获取附件的id
 	chrome.extension.sendMessage({
 		cmd: "get"
 	}, function(response) {
 		console.log("success");
-		console.log(response);
+		for(var i = 0; i < response.length; i++){
+			console.log(response[i].msgId);
+			console.log(response[i].attachId);
+		}
+		
 	});
 }
