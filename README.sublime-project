@@ -12,6 +12,10 @@
 		{
 			"follow_symlinks": true,
 			"path": "/home/pokerface/GitHub/Gmail_Plugin"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/home/pokerface/GitHub/chrome_extensions_and_apps_programming/website_status"
 		}
 	]
 }

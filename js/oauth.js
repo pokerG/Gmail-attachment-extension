@@ -6,8 +6,8 @@ var google = new OAuth2('google', {
 
 google.authorize(function() {
 
-	
-	
+
+
 	var ATTACHMENT_FETCH_URL = 'https://www.googleapis.com/gmail/v1/users/me/messages/MessageId/attachments/AttId';
 
 	var form = document.getElementById('form');
@@ -66,14 +66,27 @@ function getMessage(MessageId) {
 			if (xhr.status == 200) {
 
 				var messageObj = JSON.parse(xhr.responseText);
-				console.log(messageObj.id);
+				// console.log(messageObj.snippet);
 				var parts = messageObj.payload.parts;
 
 				//Fetch information of the attachments with a for loop
-				for (var i = 0; i < parts.length; i++) {
-					var part = parts[i];
-					console.log(part.body.attachmentId);
+				if (typeof(parts) != "undefined") {
+					for (var i = 0; i < parts.length; i++) {
+						var part = parts[i];
+						if (part.body.attachmentId != null) {
+
+							chrome.runtime.sendMessage({
+								cmd: "send",
+								msgId: messageObj.id,
+								attachId: part.body.attachmentId
+							}, function(response) {});
+
+							console.log(part.body.attachmentId);
+						}
+
+					}
 				}
+
 
 			} else {
 				// Request failure: something bad happened
