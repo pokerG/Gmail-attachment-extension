@@ -87,11 +87,11 @@ function getMessage(MessageId) {
 					for (var i = 0; i < parts.length; i++) {
 						var part = parts[i];
 						if (part.body.attachmentId != null) {
-							/*chrome.runtime.sendMessage({
+							chrome.runtime.sendMessage({
 								cmd: "send",
 								msgId: messageObj.id,
 								attachId: part.body.attachmentId
-							}, function(response) {});*/
+							}, function(response) {});
 							getAttachment(messageObj.id, part.body.attachmentId);
 							console.log(messageObj.payload.filename);
 						}
