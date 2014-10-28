@@ -23,6 +23,7 @@ function insert_btn(parent) {
 		return element;
 	}
 }
+
 document.onmousemove = function() {
 	reply = document.querySelector('.Am,.aO9,.Al,.editable,.LW-avf'); //回复
 	newemail = document.querySelectorAll('.AD'); //新邮件
@@ -39,6 +40,10 @@ document.onmousemove = function() {
 
 }
 
+/**
+ * 按钮click事件,其中调用各种处理函数
+ * @param  {[事件]} e [事件 e.target为DOM element]
+ */
 function attachClick(e){
 	getAttach();
 }

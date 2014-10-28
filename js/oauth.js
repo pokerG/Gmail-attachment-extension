@@ -8,7 +8,7 @@ google.authorize(function() {
 	// Hook up the form to create a new task with Google Tasks
 	form.addEventListener('submit', function(event) {
 		event.preventDefault();
-		var PageToken = fetchList(null);
+		var PageToken = fetchList(null,"has:attachment");
 		/*while(PageToken != ""){
 			PageToken = fetchList(PageToken);
 		}*/
@@ -23,8 +23,11 @@ var attchList = new Array();
  * @param  {[string]} nextPageToken 下一页邮件列表的token
  * ToDo 查询条件
  */
-function fetchList(PageToken) {
-	var LIST_FETCH_URL = 'https://www.googleapis.com/gmail/v1/users/me/messages?q=has%3Aattachment';
+
+function fetchList(PageToken,q) {
+	var LIST_FETCH_URL = 'https://www.googleapis.com/gmail/v1/users/me/messages';
+	LIST_FETCH_URL = LIST_FETCH_URL + "?q=" + q;
+	// LIST_FETCH_URL = encodeURI(LIST_FETCH_URL);
 	var xhr = new XMLHttpRequest();
 	var nextPageToken = ""; 
 	//var msg = gapi.client.gmail.users.messages.get({"id":list.messages[i].id});
@@ -49,7 +52,7 @@ function fetchList(PageToken) {
 		}
 	};
 	if (PageToken != null) {
-		xhr.open('GET', LIST_FETCH_URL + "&pageToken=" + PageToken);
+		// xhr.open('GET', LIST_FETCH_URL + "&pageToken=" + PageToken);
 	} else {
 		xhr.open('GET', LIST_FETCH_URL, true);
 	}
