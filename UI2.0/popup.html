@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<head>
+	<title>添加附件</title>
+	<meta name="description" content="Creating Modal Window with Bootstrap">
+	<link href="css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+
+		<div id="example" class="modal hide fade in" style="display: none;">
+			<div class="modal-header">
+				<h1 style="color: #ee5f5b;">
+					Gmail附件
+				</h1>
+			</div>
+			<div class="modal-body">
+				<div class='span3 sidebar'>
+					<h2>
+						·附件来源
+					</h2>
+					<select class="multiselect" multiple="multiple">
+
+						<option value="in">
+							收件箱
+						</option>
+
+						<option value="out">
+							发件箱
+						</option>
+
+						<option value="un">
+							垃圾箱
+						</option>
+
+					</select>
+				</div>
+				<div class='span3 sidebar'>
+					<h2>
+						·附件搜索
+					</h2>
+					<div class="form">
+						<div class="input-append">
+							<input type="text" value="要搜索的附件..." class="span2">
+							<button class="btn btn-primary btn-middle btn-danger">
+								搜索
+							</button>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="container-fluid"
+					style="margin: auto; width: 480px; text-align: middle;">
+
+					<div>
+						<table class="table table-hover table-bordered"
+							pa_ui_name="table,exinput" pa_ui_hover="true"
+							pa_ui_selectable="true" pa_ui_select_mode="multi"
+							pa_ui_select_trigger="tr" pa_ui_select_column="0"
+							pa_ui_select_triggerelement=":checkbox">
+							<caption>
+								<h3>
+									·附件列表
+								</h3>
+							</caption>
+							<thead>
+								<tr>
+									<th>
+										选择
+									</th>
+									<th>
+										ID
+									</th>
+									<th>
+										名称
+									</th>
+									<th>
+										日期
+									</th>
+									<th>
+										来源
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<input type="checkbox" />
+									</td>
+									<td>
+										1
+									</td>
+									<td>
+										附件1
+									</td>
+									<td>
+										2014-10-27
+									</td>
+									<td>
+										收件箱
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<input type="checkbox" />
+									</td>
+									<td>
+										2
+									</td>
+									<td>
+										附件2
+									</td>
+									<td>
+										2014-10-27
+									</td>
+									<td>
+										发件箱
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<input type="checkbox" />
+									</td>
+									<td>
+										3
+									</td>
+									<td>
+										附件3
+									</td>
+									<td>
+										2014-10-27
+									</td>
+									<td>
+										垃圾箱
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+
+						<div class="pagination"
+							style="margin: auto; width: 480px; text-align: center;">
+							<ul>
+								<li>
+									<a href="#" style="color: white; background-color: #ee5f5b;">Prev</a>
+								</li>
+								<li>
+									<a href="#" style="color: blue;">1</a>
+								</li>
+								<li>
+									<a href="#" style="color: red;">2</a>
+								</li>
+								<li>
+									<a href="#" style="color: yellow;">3</a>
+								</li>
+								<li>
+									<a href="#" style="color: blue;">4</a>
+								</li>
+								<li>
+									<a href="#" style="color: green;">5</a>
+								</li>
+								<li>
+									<a href="#" style="color: white; background-color: #ee5f5b;">Next</a>
+								</li>
+							</ul>
+						</div>
+
+						<div class="btn-group"
+							style="margin: auto; width: 480px; text-align: right;">
+							<button class="btn btn-primary btn-middle btn-danger">
+								添加选中附件
+							</button>
+						</div>
+					<br></br>
+
+					</div>
+
+				</div>
+
+				<div class="modal-footer">
+					<div>
+						<table class="table table-hover table-bordered"
+							pa_ui_name="table,exinput" pa_ui_hover="true"
+							pa_ui_selectable="true" pa_ui_select_mode="multi"
+							pa_ui_select_trigger="tr" pa_ui_select_column="0"
+							pa_ui_select_triggerelement=":checkbox">
+							<caption>
+								<h3>
+									·选中附件列表
+								</h3>
+							</caption>
+							<thead>
+								<tr>
+									<th>
+										选择
+									</th>
+									<th>
+										ID
+									</th>
+									<th>
+										名称
+									</th>
+									<th>
+										日期
+									</th>
+									<th>
+										来源
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<input type="checkbox" />
+									</td>
+									<td>
+										1
+									</td>
+									<td>
+										附件1
+									</td>
+									<td>
+										2014-10-27
+									</td>
+									<td>
+										收件箱
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<input type="checkbox" />
+									</td>
+									<td>
+										2
+									</td>
+									<td>
+										附件2
+									</td>
+									<td>
+										2014-10-27
+									</td>
+									<td>
+										发件箱
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="btn-group"
+							style="margin: auto; width: 480px; text-align: right;">
+							<button class="btn btn-primary btn-middle btn-danger">
+								删除选中附件
+							</button>
+						</div>
+					<br></br>
+					<div class="btn-group"
+						style="margin: auto; width: 480px; text-align: right;">
+
+						<form class="form">
+							<button class="btn btn-primary btn-large btn-danger">
+								确认
+							</button>
+							<button class="btn btn-primary btn-large btn-danger">
+								放弃
+							</button>
+
+						</form>
+					</div>
+
+				</div>
+			</div>
+			</form>
+		</div>
+	</div>
+	</div>
+	<p>
+		<a data-toggle="modal" href="#example"
+			class="btn btn-danger btn-middle">添加附件</a>
+	</p>
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>-->
+	<script src="js/jquery.js">
+</script>
+	<script src="js/bootstrap-modal.js">
+</script>
+</body>
+</html>
