@@ -19,7 +19,7 @@ function insert_btn(parent) {
 		element.setAttribute("class", "atB")
 		// element.innerText = "attach";
 		node.appendChild(element);
-		element.addEventListener("click", openFileBrowser, false);
+		element.addEventListener("click", attachClick, false);
 		return element;
 	}
 }
@@ -39,27 +39,7 @@ document.onmousemove = function() {
 
 }
 
-/**
- * [openFileBrowser description]
- * @param  {[type]} e [description]
- * @return {[type]}   [description]
- */
-var msgs = new Array();
-
-function openFileBrowser(e) {
-	// t = e.target;
-
-
-	//获取附件的id
-	chrome.extension.sendMessage({
-		cmd: "get"
-	}, function(response) {
-		// msgs = response
-		console.log("success");
-		for(var i = 0; i < response.length; i++){
-			console.log(response[i].msgId);
-			console.log(response[i].attachId);
-		}
-		
-	});
+function attachClick(e){
+	getAttach();
 }
+

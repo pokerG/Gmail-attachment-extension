@@ -19,7 +19,7 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 
 var msgs = new Array(); //附件信息,json数组
-var count = 0;  //附件个数
+var count = 0; //附件个数
 
 /**
  * popup 与 content_scripts 通过background通信
@@ -42,3 +42,4 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   }
 
 });
+
