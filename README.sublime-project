@@ -4,18 +4,6 @@
 		{
 			"follow_symlinks": true,
 			"path": "."
-		},
-		{
-			"follow_symlinks": true,
-			"path": "/home/pokerface/下载/MetisMe-Attachments-Management-System_v3.0.2.8"
-		},
-		{
-			"follow_symlinks": true,
-			"path": "/home/pokerface/GitHub/Gmail_Plugin"
-		},
-		{
-			"follow_symlinks": true,
-			"path": "/home/pokerface/GitHub/chrome_extensions_and_apps_programming/website_status"
 		}
 	]
 }

@@ -46,5 +46,6 @@ document.onmousemove = function() {
  */
 function attachClick(e){
 	getAttach();
+	// getStorage();
 }
 

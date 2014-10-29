@@ -16,6 +16,7 @@
     },
 
     "permissions": [ 
+        "storage",
         "declarativeContent",
         "*://*.google.com/*",
         "*://mail.google.com/*", 

@@ -35,8 +35,11 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
       attachId: message.attachId
     };
     count ++;
-    console.log(message.msgId);
-    console.log(message.attachId);
+    /*console.log(message.msgId);
+    console.log(message.attachId);*/
+    chrome.storage.local.set(msgs[count-1],function(items){
+      console.log(items);
+    });
   } else if (message.cmd == "get") {
     sendResponse(msgs);
   }
