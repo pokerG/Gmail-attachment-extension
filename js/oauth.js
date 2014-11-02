@@ -8,7 +8,7 @@ google.authorize(function() {
 	// Hook up the form to create a new task with Google Tasks
 	form.addEventListener('submit', function(event) {
 		event.preventDefault();
-		var PageToken = fetchList(null,"has:attachment");
+		var PageToken = fetchList(null, "has:attachment");
 		/*while(PageToken != ""){
 			PageToken = fetchList(PageToken);
 		}*/
@@ -24,12 +24,12 @@ var attchList = new Array();
  * ToDo 查询条件
  */
 
-function fetchList(PageToken,q) {
+function fetchList(PageToken, q) {
 	var LIST_FETCH_URL = 'https://www.googleapis.com/gmail/v1/users/me/messages';
 	LIST_FETCH_URL = LIST_FETCH_URL + "?q=" + q;
 	// LIST_FETCH_URL = encodeURI(LIST_FETCH_URL);
 	var xhr = new XMLHttpRequest();
-	var nextPageToken = ""; 
+	var nextPageToken = "";
 	//var msg = gapi.client.gmail.users.messages.get({"id":list.messages[i].id});
 	xhr.onreadystatechange = function(event) {
 		if (xhr.readyState == 4) {
@@ -81,7 +81,7 @@ function getMessage(MessageId) {
 				var parts = messageObj.payload.parts;
 
 				msgList[msgList.length] = messageObj;
-
+				
 				//Fetch information of the attachments with a for loop
 				if (typeof(parts) != "undefined") {
 					for (var i = 0; i < parts.length; i++) {
@@ -90,10 +90,12 @@ function getMessage(MessageId) {
 							chrome.runtime.sendMessage({
 								cmd: "send",
 								msgId: messageObj.id,
-								attachId: part.body.attachmentId
+								filename:part.filename,
+								partId:part.partId
 							}, function(response) {});
+
 							getAttachment(messageObj.id, part.body.attachmentId);
-							console.log(messageObj.payload.filename);
+							console.log(messageObj);
 						}
 					}
 				}
@@ -125,8 +127,7 @@ function getAttachment(messageId, attchId) {
 			if (xhr.status == 200) {
 				var attchObj = JSON.parse(xhr.responseText);
 				if (typeof(attchObj) != "undefined") {
-					attchList[attchList.length] = attchObj
-					console.log(attchObj);
+					attchList[attchList.length] = attchObj;
 				}
 			} else {
 				console.log(xhr.status);
@@ -141,3 +142,4 @@ function getAttachment(messageId, attchId) {
 	xhr.setRequestHeader('Authorization', 'OAuth ' + token);
 	xhr.send(null);
 }
+

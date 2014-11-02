@@ -4,6 +4,14 @@
 		{
 			"follow_symlinks": true,
 			"path": "."
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/home/pokerface/GitHub/Gmail_Plugin"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/home/pokerface/GitHub/gmail-chrome-extension-boilerplate-master"
 		}
 	]
 }

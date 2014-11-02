@@ -16,6 +16,7 @@
     },
 
     "permissions": [ 
+        "downloads",
         "storage",
         "declarativeContent",
         "*://*.google.com/*",
@@ -26,7 +27,7 @@
     "content_scripts": [
         {
             "matches": ["*://mail.google.com/*"],
-            "js": ["js/jquery-1.11.1.min.js","js/addBtn.js","js/attach.js"]
+            "js": ["js/content.js","js/attach.js"]
         },
         {
             "matches": ["http://www.google.com/robots.txt*"],
@@ -39,6 +40,9 @@
 
     "web_accessible_resources": [
         "oauth2/oauth2.html",
-        "images/mail_open.png"
+        "images/mail_open.png",
+        "js/jquery-1.11.1.min.js",
+        "js/gmail.js",
+        "js/getik.js"
     ]
 }

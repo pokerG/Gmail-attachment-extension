@@ -1,3 +1,29 @@
+var usrik
+window.onload = function () {	
+
+	var jq = document.createElement('script');
+  jq.src = chrome.extension.getURL('js/jquery-1.11.1.min.js');
+  document.getElementsByTagName('body')[0].appendChild(jq)
+
+  var sm = document.createElement('script');
+  sm.src = chrome.extension.getURL('js/gmail.js');
+  document.getElementsByTagName('body')[0].appendChild(sm);
+
+	var sm = document.createElement('script');
+  sm.src = chrome.extension.getURL('js/getik.js');
+  document.getElementsByTagName('body')[0].appendChild(sm);
+	
+	window.addEventListener("message", function(event) {
+	
+    if(event.data.usrik) {
+    	usrik = event.data.usrik
+		console.log(usrik);
+
+    }
+  }, false);
+}
+
+
 /**
  * 向邮件插入搜索附件的按钮
  * @param  {[DOM Element]} parent [新建邮件的div或document]
@@ -45,7 +71,7 @@ document.onmousemove = function() {
  * @param  {[事件]} e [事件 e.target为DOM element]
  */
 function attachClick(e){
-	getAttach();
+	getAttach(usrik);
 	// getStorage();
 }
 
