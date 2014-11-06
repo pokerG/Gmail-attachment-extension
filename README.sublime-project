@@ -3,15 +3,11 @@
 	[
 		{
 			"follow_symlinks": true,
-			"path": "."
+			"path": "/home/pokerface/GitHub/HIT-OS-Experiment"
 		},
 		{
 			"follow_symlinks": true,
-			"path": "/home/pokerface/GitHub/Gmail_Plugin"
-		},
-		{
-			"follow_symlinks": true,
-			"path": "/home/pokerface/GitHub/gmail-chrome-extension-boilerplate-master"
+			"path": "/home/pokerface/oslab/linux-0.11"
 		}
 	]
 }

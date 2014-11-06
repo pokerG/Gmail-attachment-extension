@@ -1,4 +1,5 @@
-var usrik
+var usrik	//every email address have an unique ik 
+
 window.onload = function () {	
 
 	var jq = document.createElement('script');
@@ -6,7 +7,7 @@ window.onload = function () {
   document.getElementsByTagName('body')[0].appendChild(jq)
 
   var sm = document.createElement('script');
-  sm.src = chrome.extension.getURL('js/gmail.js');
+  sm.src = chrome.extension.getURL('js/gmail.min.js');
   document.getElementsByTagName('body')[0].appendChild(sm);
 
 	var sm = document.createElement('script');
@@ -71,7 +72,7 @@ document.onmousemove = function() {
  * @param  {[事件]} e [事件 e.target为DOM element]
  */
 function attachClick(e){
-	getAttach(usrik);
-	// getStorage();
+	// getAttach(usrik);
+	getStorage();
 }
 

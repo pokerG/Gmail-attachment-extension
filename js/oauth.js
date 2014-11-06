@@ -91,7 +91,8 @@ function getMessage(MessageId) {
 								cmd: "send",
 								msgId: messageObj.id,
 								filename:part.filename,
-								partId:part.partId
+								partId:part.partId,
+								attachmentId:part.body.attachmentId
 							}, function(response) {});
 
 							getAttachment(messageObj.id, part.body.attachmentId);

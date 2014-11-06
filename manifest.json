@@ -42,7 +42,7 @@
         "oauth2/oauth2.html",
         "images/mail_open.png",
         "js/jquery-1.11.1.min.js",
-        "js/gmail.js",
+        "js/gmail.min.js",
         "js/getik.js"
     ]
 }
