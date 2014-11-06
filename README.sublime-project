@@ -3,11 +3,7 @@
 	[
 		{
 			"follow_symlinks": true,
-			"path": "/home/pokerface/GitHub/HIT-OS-Experiment"
-		},
-		{
-			"follow_symlinks": true,
-			"path": "/home/pokerface/oslab/linux-0.11"
+			"path": "."
 		}
 	]
 }
