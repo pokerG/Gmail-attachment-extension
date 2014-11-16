@@ -32,10 +32,10 @@ function addModal(parent) {
 	body.appendChild(divIframe);
 	
 	var txt = document.createElement("input");
-			txt.type="hidden";
-			txt.name="at";
-			txt.value="AF6bupN-cIAoLV2N2m5hj1YnDvTjGfGoCQ";
-	body.appendChild(txt);
+	txt.type="hidden";
+	txt.name="at";
+	txt.value="AF6bupN-cIAoLV2N2m5hj1YnDvTjGfGoCQ";
+		body.appendChild(txt);
 
 	}
 }
