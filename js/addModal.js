@@ -3,6 +3,7 @@
  * @return {[DOM Element]}        [插入的窗口]
  */
 function addModal(parent) {
+	alert('add'); 
 	body = parent.querySelector(".aAU");
 	existModal = parent.querySelector(".attachModal");
 	if (existModal == null) {
@@ -15,6 +16,7 @@ function addModal(parent) {
 
 	var divIframe = document.createElement("div");
 		divIframe.setAttribute("class", "divIframe");
+		divIframe.setAttribute("role", "dialog");
 		divIframe.setAttribute("style", "opacity: 0.5; width: 1366px; height: 352px;");
 		var ifr = document.createElement("iframe");
 			ifr.setAttribute("id", "iframemodal");
@@ -28,9 +30,12 @@ function addModal(parent) {
 			ifr.setAttribute("src", iframeURL);
 		divIframe.appendChild(ifr);
 	body.appendChild(divIframe);
-
+	
+	var txt = document.createElement("input");
+			txt.type="hidden";
+			txt.name="at";
+			txt.value="AF6bupN-cIAoLV2N2m5hj1YnDvTjGfGoCQ";
+	body.appendChild(txt);
 
 	}
 }
-
-
