@@ -23,7 +23,7 @@ function addModal(parent) {
 			ifr.setAttribute("name", "modal");
 			ifr.setAttribute("class", "KA-JQ");
 			ifr.setAttribute("style.display", "block");
-			var iframeURL = chrome.extension.getURL('page/addEx.html');
+			var iframeURL = chrome.extension.getURL('js/addEx.html');
 			ifr.onload = function() {   
    			 alert('loaded');   
 			}; 
