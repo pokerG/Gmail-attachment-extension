@@ -3,6 +3,7 @@
  * @param  {[DOM Element]} parent [新建邮件的div或document]
  * @return {[DOM Element]}        [插入的按钮]
  */
+ 
 function insert_btn(parent) {
 	toolbar = parent.querySelector(".pXSFsb"); //邮件的附件,图片工具栏
 	if (toolbar == null) {
@@ -15,7 +16,7 @@ function insert_btn(parent) {
 		url = chrome.extension.getURL("/images/mail_open.png");
 		element.setAttribute("src", url);
 		element.setAttribute("name", "attachBtn");
-		element.setAttribute("id", "ab");
+		element.setAttribute("id", "ab32");
 		element.setAttribute("class", "atB");
 		element.setAttribute("tabindex", "1");
 		element.setAttribute("role", "button");
@@ -26,9 +27,6 @@ function insert_btn(parent) {
 		element.onclick = function showFrm()
     {
     		addModal(document);
-        var objFrm = document.getElementById('iframemodal');
-        objFrm.style.display = "block";
-        
     }
 		// element.innerText = "attach";
 		node.appendChild(element);

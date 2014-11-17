@@ -41,6 +41,7 @@
     "web_accessible_resources": [
         "oauth2/oauth2.html",
         "images/mail_open.png",
+        "images/closeModal.png",
         "js/jquery-1.11.1.min.js",
         "js/gmail.min.js",
         "js/getik.js",

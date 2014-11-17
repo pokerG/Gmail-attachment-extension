@@ -3,39 +3,48 @@
  * @return {[DOM Element]}        [插入的窗口]
  */
 function addModal(parent) {
-	alert('add'); 
+	//alert('add'); 
 	body = parent.querySelector(".aAU");
-	existModal = parent.querySelector(".attachModal");
+	existModal = parent.querySelector(".KA Kj-JD picker-dialog");
 	if (existModal == null) {
 	
 	var divBack = document.createElement("div");
 		divBack.setAttribute("class", "KA Kj-JD-Jh");
-		divBack.setAttribute("style", "opacity: 0.5; width: 1366px; height: 352px;");
+		divBack.setAttribute("style", "opacity: 0.3; width: 1366px; height: 800px;");
 		divBack.setAttribute("aria-hidden" ,"true");
 	body.appendChild(divBack);
 
 	var divIframe = document.createElement("div");
 		divIframe.setAttribute("class", "KA Kj-JD picker-dialog");
+		divIframe.setAttribute("id", "divmodal");
 		divIframe.setAttribute("role", "dialog");
-		divIframe.setAttribute("style", "opacity: 0.5; width: 1366px; height: 352px;");
+		divIframe.setAttribute("style", "opacity: 0.8; width: 1366px; height: 800px; overflow-y:hidden;");
+		divIframe.border= "0px";
+		
+		var clsbut = document.createElement("img");
+		url = chrome.extension.getURL("/images/closeModal.png");
+		clsbut.setAttribute("src", url);
+		clsbut.setAttribute("align", "right");
+			clsbut.onclick = function() {
+				body.removeChild(divBack);
+				body.removeChild(divIframe);
+			}
+		divIframe.appendChild(clsbut);
+		
 		var ifr = document.createElement("iframe");
 			ifr.setAttribute("id", "iframemodal");
 			ifr.setAttribute("name", "modal");
 			ifr.setAttribute("class", "KA-JQ");
-			ifr.setAttribute("style.display", "block");
+			ifr.setAttribute("frameborder", "0");
+			ifr.setAttribute("tabindex", "0");
 			var iframeURL = chrome.extension.getURL('../addEx.html');
-			ifr.onload = function() {   
-   			 alert('loaded');   
-			}; 
 			ifr.setAttribute("src", iframeURL);
 		divIframe.appendChild(ifr);
+		
 	body.appendChild(divIframe);
-	
-	var txt = document.createElement("input");
-			//txt.type="hidden";
-			txt.name="at";
-			txt.value="AF6bupN-cIAoLV2N2m5hj1YnDvTjGfGoCQ";
-	//divIframe.appendChild(txt);
+
 
 	}
 }
+
+
