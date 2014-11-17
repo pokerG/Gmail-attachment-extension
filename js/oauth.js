@@ -86,7 +86,7 @@ function getMessage(MessageId) {
 				if (typeof(parts) != "undefined") {
 					for (var i = 0; i < parts.length; i++) {
 						var part = parts[i];
-						if (part.body.attachmentId != null) {
+						if (part.body.attachmentId != null && part.filename != "") {
 							chrome.runtime.sendMessage({
 								cmd: "send",
 								msgId: messageObj.id,
