@@ -23,19 +23,19 @@ function addModal(parent) {
 			ifr.setAttribute("name", "modal");
 			ifr.setAttribute("class", "KA-JQ");
 			ifr.setAttribute("style.display", "block");
-			var iframeURL = chrome.extension.getURL('js/addEx.html');
+			var iframeURL = chrome.extension.getURL('../addEx.html');
 			ifr.onload = function() {   
    			 alert('loaded');   
 			}; 
 			ifr.setAttribute("src", iframeURL);
 		divIframe.appendChild(ifr);
-	body.appendChild(divIframe);
+	divBack.appendChild(divIframe);
 	
 	var txt = document.createElement("input");
-			txt.type="hidden";
+			//txt.type="hidden";
 			txt.name="at";
 			txt.value="AF6bupN-cIAoLV2N2m5hj1YnDvTjGfGoCQ";
-	body.appendChild(txt);
+	//divIframe.appendChild(txt);
 
 	}
 }

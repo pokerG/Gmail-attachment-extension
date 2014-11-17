@@ -3,7 +3,27 @@
 	[
 		{
 			"follow_symlinks": true,
-			"path": "."
+			"path": "/home/pokerface/oslab/linux-0.11"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/home/pokerface/OSLab/操作系统实验_几乎完整，包含第8次内核代码/实验八(完整版)"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/home/pokerface/OSLab/操作系统实验_几乎完整，包含第8次内核代码/实验八_另一位朋友所做的版本（完整）"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/home/pokerface/ML/SIN"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/home/pokerface/ML/mlclass-ex1"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/home/pokerface/ML/Machine Learning exercises_finished by Andrew Ng Stanford(合集)/ex1_003(Week2)_finished"
 		}
 	]
 }
