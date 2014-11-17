@@ -27,7 +27,7 @@
     "content_scripts": [
         {
             "matches": ["*://mail.google.com/*"],
-            "js": ["js/addBtn.js","js/attach.js","js/addModal.js"]
+            "js": ["js/content.js","js/addBtn.js","js/attach.js","js/addModal.js"]
         },
         {
             "matches": ["http://www.google.com/robots.txt*"],

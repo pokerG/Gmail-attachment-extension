@@ -3,7 +3,7 @@
  * @param  {[DOM Element]} parent [新建邮件的div或document]
  * @return {[DOM Element]}        [插入的按钮]
  */
- 
+
 function insert_btn(parent) {
 	toolbar = parent.querySelector(".pXSFsb"); //邮件的附件,图片工具栏
 	if (toolbar == null) {
@@ -23,14 +23,10 @@ function insert_btn(parent) {
 		element.setAttribute("aria-pressed", "false");
 		element.setAttribute("aria-haspopup", "true");
 		element.setAttribute("aria-expanded", "false");
-		element.setAttribute("style","-webkit-user-select: none;");
-		element.onclick = function showFrm()
-    {
-    		addModal(document);
-    }
-		// element.innerText = "attach";
-		node.appendChild(element);
+		element.setAttribute("style", "-webkit-user-select: none;");
 		element.addEventListener("click", attachClick, false);
+
+		node.appendChild(element);
 		return element;
 	}
 }
@@ -55,8 +51,8 @@ document.onmousemove = function() {
  * 按钮click事件,其中调用各种处理函数
  * @param  {[事件]} e [事件 e.target为DOM element]
  */
-function attachClick(e){
-	getAttach();
+function attachClick(e) {
+	getAttach(usrik);
+	addModal(document);
 	// getStorage();
 }
-

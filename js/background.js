@@ -32,24 +32,23 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   if (message.cmd == "send") {
     msgs[count] = {
       msgId: message.msgId,
-      filename:message.filename,
-      partId:message.partId
+      filename: message.filename,
+      partId: message.partId
     }
-    count ++;
+    count++;
     /*co nsole.log(message.msgId);
     console.log(message.attachId);*/
-    chrome.storage.local.set(msgs[count-1],function(items){
+    chrome.storage.local.set(msgs[count - 1], function(items) {
       console.log(items);
     });
   } else if (message.cmd == "get") {
     sendResponse(msgs);
-  } else if(message.cmd == "download"){
+  } else if (message.cmd == "download") {
     chrome.downloads.download({
-      url:message.url,
+      url: message.url,
       conflictAction: 'uniquify',
       saveAs: true
     })
   }
 
 });
-
