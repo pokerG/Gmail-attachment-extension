@@ -1,0 +1,51 @@
+{
+    "manifest_version": 2,
+    "name": "Gmail Attachment Management",
+    "version": "1.0",
+    "description": "管理你的gmail附件",
+
+    "page_action": {  //Oauth认证
+        "default_icon": "images/mail_open.png" ,
+        "default_title" : "Gmail Attachment Management",
+        "default_popup": "popup.html"
+    },
+
+    "background": {
+        "scripts": ["js/background.js"],
+        "persistent": false
+    },
+
+    "permissions": [ 
+        "downloads",
+        "storage",
+        "declarativeContent",
+        "*://*.google.com/*",
+        "*://mail.google.com/*", 
+        "https://accounts.google.com/o/oauth2/token"
+    ],
+
+    "content_scripts": [
+        {
+            "matches": ["*://mail.google.com/*"],
+            "js": ["js/addBtn.js","js/attach.js","js/addModal.js"]
+        },
+        {
+            "matches": ["http://www.google.com/robots.txt*"],
+            "js": ["oauth2/oauth2_inject.js"],
+            "run_at": "document_start"
+        }
+    ],
+
+    "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+
+    "web_accessible_resources": [
+        "oauth2/oauth2.html",
+        "images/mail_open.png",
+        "js/jquery-1.11.1.min.js",
+        "js/gmail.min.js",
+        "js/getik.js",
+        "addEx.html",
+        "js/bootstrap.js",
+        "js/layer.min.js"
+    ]
+}
