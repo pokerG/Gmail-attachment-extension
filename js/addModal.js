@@ -15,7 +15,7 @@ function addModal(parent) {
 	body.appendChild(divBack);
 
 	var divIframe = document.createElement("div");
-		divIframe.setAttribute("class", "divIframe");
+		divIframe.setAttribute("class", "KA Kj-JD picker-dialog");
 		divIframe.setAttribute("role", "dialog");
 		divIframe.setAttribute("style", "opacity: 0.5; width: 1366px; height: 352px;");
 		var ifr = document.createElement("iframe");
@@ -29,7 +29,7 @@ function addModal(parent) {
 			}; 
 			ifr.setAttribute("src", iframeURL);
 		divIframe.appendChild(ifr);
-	divBack.appendChild(divIframe);
+	body.appendChild(divIframe);
 	
 	var txt = document.createElement("input");
 			//txt.type="hidden";
