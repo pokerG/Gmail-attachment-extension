@@ -33,6 +33,9 @@ if (message.cmd == "get") {
       conflictAction: 'uniquify',
       saveAs: true
     })
+  } else if (message.cmd == "draft"){
+    var df = getDraftsList();
+    sendResponse(df);
   }
 
 });
@@ -113,12 +116,13 @@ function getMessage(MessageId) {
                 msgId: messageObj.id,
                 filename: part.filename,
                 partId: part.partId,
-                attachmentId: part.body.attachmentId
+                attachmentId: part.body.attachmentId,
+                size:part.body.size
               }
               chrome.storage.local.set(msgs[msgs.length - 1], function(items) {
                 console.log(items);
               });
-              getAttachment(messageObj.id, part.body.attachmentId);
+              // getAttachment(messageObj.id, part.body.attachmentId);
               console.log(messageObj);
             }
           }
@@ -166,5 +170,20 @@ function getAttachment(messageId, attchId) {
   xhr.setRequestHeader('Authorization', 'OAuth ' + token);
   xhr.send(null);
 }
+
+function getDraftsList(){
+  var DRAFT_LIST_URL = "https://www.googleapis.com/gmail/v1/users/me/drafts";
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', DRAFT_LIST_URL, false);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  var token = google.getAccessToken();
+  xhr.setRequestHeader('Authorization', 'OAuth ' + token);
+  xhr.send(null);
+  var res = JSON.parse(xhr.responseText);
+  drafts = res.drafts;
+  console.log(drafts[0]);
+  return drafts[0];
+}
+
 
 fetchList(null, "has:attachment");
