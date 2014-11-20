@@ -1,7 +1,11 @@
 var google = new OAuth2('google', {
   client_id: '722713518095-tpo9ibi81nts4fhpgf415m1e84h4rddq.apps.googleusercontent.com',
   client_secret: 'BfodvtWGmuvP64FkH1lQWcoA',
-  api_scope: 'https://www.googleapis.com/auth/gmail.readonly'
+  api_scope: ['https://mail.google.com/',
+    'https://www.googleapis.com/auth/gmail.compose',
+    'https://www.googleapis.com/auth/gmail.modify',
+    'https://www.googleapis.com/auth/gmail.readonly'
+  ]
 });
 google.authorize(function() {
   // Hook up the form to create a new task with Google Tasks
@@ -25,7 +29,7 @@ var count = 0; //附件个数
  */
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   // console.log(message);
-if (message.cmd == "get") {
+  if (message.cmd == "get") {
     sendResponse(msgs);
   } else if (message.cmd == "download") {
     chrome.downloads.download({
@@ -33,7 +37,7 @@ if (message.cmd == "get") {
       conflictAction: 'uniquify',
       saveAs: true
     })
-  } else if (message.cmd == "draft"){
+  } else if (message.cmd == "draft") {
     var df = getDraftsList();
     sendResponse(df);
   }
@@ -117,7 +121,7 @@ function getMessage(MessageId) {
                 filename: part.filename,
                 partId: part.partId,
                 attachmentId: part.body.attachmentId,
-                size:part.body.size
+                size: part.body.size
               }
               chrome.storage.local.set(msgs[msgs.length - 1], function(items) {
                 console.log(items);
@@ -171,7 +175,7 @@ function getAttachment(messageId, attchId) {
   xhr.send(null);
 }
 
-function getDraftsList(){
+function getDraftsList() {
   var DRAFT_LIST_URL = "https://www.googleapis.com/gmail/v1/users/me/drafts";
   var xhr = new XMLHttpRequest();
   xhr.open('GET', DRAFT_LIST_URL, false);
