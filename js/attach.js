@@ -1,11 +1,12 @@
 var msgs = new Array();
-var attach = new Array();
+
 /**
  * 获取附件
  * @param  {[string]} usrik [user's ik]
  * @param  {[string]} q 	[query term]                     
  */
 function getAttach(usrik) {
+	var attach = new Array();
 
 	//从background获得附件信息
 	chrome.extension.sendMessage({
