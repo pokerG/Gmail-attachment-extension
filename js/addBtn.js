@@ -53,7 +53,7 @@ document.onmousemove = function() {
  */
 function attachClick(e) {
 	getAttach();
-	addAttachment();
+	//addAttachment();
 	addModal(document);
 	// getStorage();
 }
