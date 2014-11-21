@@ -4,14 +4,15 @@
     "version": "1.0",
     "description": "管理你的gmail附件",
 
-    "page_action": {  //Oauth认证
-        "default_icon": "images/mail_open.png" ,
-        "default_title" : "Gmail Attachment Management",
-        "default_popup": "popup.html"
-    },
+    // "page_action": {  //Oauth认证
+    //     "default_icon": "images/mail_open.png" ,
+    //     "default_title" : "Gmail Attachment Management",
+    //     "default_popup": "popup.html"
+    // },
 
     "background": {
-        "scripts": ["js/background.js"],
+        "page": "background.html",
+        // "scripts": ["js/background.js"],
         "persistent": false
     },
 
@@ -27,7 +28,7 @@
     "content_scripts": [
         {
             "matches": ["*://mail.google.com/*"],
-            "js": ["js/content.js","js/addBtn.js","js/attach.js","js/addModal.js"]
+            "js": ["js/jquery-1.11.1.min.js", "js/bootstrap.js", "js/content.js", "js/showAtt.js", "js/addBtn.js","js/attach.js","js/addModal.js"]
         },
         {
             "matches": ["http://www.google.com/robots.txt*"],
@@ -47,6 +48,10 @@
         "js/getik.js",
         "addEx.html",
         "js/bootstrap.js",
-        "js/layer.min.js"
+        "js/layer.min.js",
+        "css/bootstrap.css",
+        "css/bootstrap.min.css",
+        "css/bootstrap-responsive.css",
+        "css/bootstrap-responsive.min.css"
     ]
 }

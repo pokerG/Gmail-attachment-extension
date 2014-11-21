@@ -52,7 +52,8 @@ document.onmousemove = function() {
  * @param  {[事件]} e [事件 e.target为DOM element]
  */
 function attachClick(e) {
-	getAttach(usrik);
+	getAttach();
+	addAttachment();
 	addModal(document);
 	// getStorage();
 }
