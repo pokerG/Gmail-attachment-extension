@@ -19,6 +19,7 @@ function getAttach() {
 					messageId: response[i].msgId,
 					filename: response[i].filename,
 					partId: response[i].partId,
+					mimeType: response[i].mimeType,
 					attachmentId: response[i].attachmentId,
 					size : response[i].size,
 					url: url
@@ -40,7 +41,7 @@ function getStorage() {
 	});
 }
 
-function addAttachment() {
+/*function addAttachment() {
 	chrome.extension.sendMessage({
 		cmd: "draft",
 	}, function(response) {
@@ -85,5 +86,14 @@ function addAttachment() {
 		d = document.createElement("div");
 		gm.children[0].appendChild(d);
 		d.appendChild(pdiv);
+	});
+}*/
+
+
+function addAttachment(){
+	chrome.extension.sendMessage({
+		cmd: "draft",
+	},function(){
+
 	});
 }

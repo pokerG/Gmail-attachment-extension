@@ -38,8 +38,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
       saveAs: true
     })
   } else if (message.cmd == "draft") {
-    var df = getDraftsList();
-    sendResponse(df);
+    createDraft();
   }
 
 });
@@ -120,6 +119,7 @@ function getMessage(MessageId) {
                 msgId: messageObj.id,
                 filename: part.filename,
                 partId: part.partId,
+                mimeType: part.mimeType, 
                 attachmentId: part.body.attachmentId,
                 size: part.body.size
               }
@@ -154,25 +154,17 @@ function getAttachment(messageId, attchId) {
   var ATTACHMENT_FETCH_URL_PREFIX = 'https://www.googleapis.com/gmail/v1/users/me/messages/';
   var xhr = new XMLHttpRequest();
 
-  xhr.onreadystatechange = function(event) {
-    if (xhr.readyState == 4) {
-      if (xhr.status == 200) {
-        var attchObj = JSON.parse(xhr.responseText);
-        if (typeof(attchObj) != "undefined") {
-          attchList[attchList.length] = attchObj;
-        }
-      } else {
-        console.log(xhr.status);
-      }
-    }
-  };
-
-
-  xhr.open('GET', ATTACHMENT_FETCH_URL_PREFIX + messageId + '/attachments/' + attchId, true);
+  xhr.open('GET', ATTACHMENT_FETCH_URL_PREFIX + messageId + '/attachments/' + attchId, false);
   xhr.setRequestHeader('Content-Type', 'application/json');
   var token = google.getAccessToken();
   xhr.setRequestHeader('Authorization', 'OAuth ' + token);
   xhr.send(null);
+  var attchObj = JSON.parse(xhr.responseText);
+  if (typeof(attchObj) != "undefined") {
+    return attchObj;
+  }else{
+    return null;
+  }
 }
 
 function getDraftsList() {
@@ -190,4 +182,34 @@ function getDraftsList() {
 }
 
 
+function createDraft() {
+  var UPLOAD_URL = "https://www.googleapis.com/upload/gmail/v1/users/me/drafts?uploadType=media";
+  var xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function(event) {
+    if (xhr.readyState == 4) {
+      if (xhr.status == 200) {
+        var ret = JSON.parse(xhr.responseText);
+        console.log(ret);
+      } else {
+        console.log(xhr.status);
+      }
+    }
+  };
+  xhr.open('POST', UPLOAD_URL, true);
+  xhr.setRequestHeader('Content-Type', 'message/rfc822');
+  // xhr.setRequestHeader('Content-Length',1611);
+  var token = google.getAccessToken();
+  xhr.setRequestHeader('Authorization', 'OAuth ' + token);
+  data = setData(msgs[0]);
+  xhr.send(data);
+}
+
+function setData(attach){
+  var data = "Content-Type: " + attach.mimeType + '; name="' + attach.filename + '"\n';
+  data += 'Content-Disposition: attachment; filename="' + attach.filename + '"\n';
+  data += 'Content-Transfer-Encoding: base64\n\n';
+  data += getAttachment(attach.msgId,attach.attachmentId).data;
+  return data;
+}
 fetchList(null, "has:attachment");
