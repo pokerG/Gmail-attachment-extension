@@ -9,7 +9,7 @@
 	</script>
 		<script src='js/bootstrap.js'>
 	</script>
-		<style type='text/css'>
+		<style type='text/css'> 
 	body {
 		background-color: #FFF;
 	}
@@ -18,61 +18,69 @@
 		color: #000;
 	}
 	</style>
+	
+	<script type="text/javascript" charset="utf-8" src="js/showAtt.js"></script> 
 
 	</head>
 
 	<body>
 		
-		<div class="row">
-			
-				<form class="modal form-horizontal" style="width: 600px; text-align: middle;">
+		<br/>
+		
+		<div class="row" style=" margin:0px auto; width:600px; height:480px; border:2px solid gray; overflow:auto">
 					
-					<div class="modal-body">
-						<div class='span3 sidebar'>
-							<h2>
-								·附件来源
-							</h2>
-							<select class="multiselect" multiple="multiple">
-
-								<option value="in">
-									收件箱
-								</option>
-
-								<option value="out">
-									发件箱
-								</option>
-
-								<option value="un">
-									垃圾箱
-								</option>
-
-							</select>
+					<div class="modal-footer" style="background-color:white;">
+					
+						<div>
+							
+							<div class='span3 sidebar'>
+								<h2>
+									·附件来源
+								</h2>
+								<select class="multiselect" multiple="multiple">
+	
+									<option value="in">
+										收件箱
+									</option>
+	
+									<option value="out">
+										发件箱
+									</option>
+	
+									<option value="un">
+										垃圾箱
+									</option>
+	
+								</select>
+							</div>
+							
+							<div class='span3 sidebar'>
+								<h2>
+									·附件搜索
+								</h2>
+								<form class="form-search">
+									<div class="input-append">
+										<input type="text" value="要搜索的附件..." class="span2">
+										<button type="submit"
+											class="btn btn-primary btn-middle btn-danger">
+											搜索
+										</button>
+									</div>
+								</form>
+	
+							</div>
+							
 						</div>
-						<div class='span3 sidebar'>
-							<h2>
-								·附件搜索
-							</h2>
-							<form class="form-search">
-								<div class="input-append">
-									<input type="text" value="要搜索的附件..." class="span2">
-									<button type="submit"
-										class="btn btn-primary btn-middle btn-danger">
-										搜索
-									</button>
-								</div>
-							</form>
 
-						</div>
-
-						<div class="container-fluid"
-							style="margin: auto; width: 480px; text-align: middle;">
+						<div class="container-fluid" id="exArea">
 
 							<div>
+								
 								<table class="table table-hover table-bordered"
 									pa_ui_name="table,exinput" pa_ui_hover="true"
 									pa_ui_selectable="true" pa_ui_select_mode="multi"
 									pa_ui_select_trigger="tr" pa_ui_select_column="0"
-									pa_ui_select_triggerelement=":checkbox">
+									pa_ui_select_triggerelement=":checkbox" id="attTable">
 									<caption>
 										<h3>
 											·附件列表
@@ -84,10 +92,13 @@
 												选择
 											</th>
 											<th>
-												ID
+												msgId
 											</th>
 											<th>
 												文件名
+											</th>
+											<th>
+												url
 											</th>
 											<th>
 												partId
@@ -95,14 +106,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<s:iterator value="msgs" var="c">
-											<tr>
-												<td><intput type="checkbox"></intput></td>
-												<td><s:property value="#c.msgId"/></td>
-												<td><s:property value="#c.filename"/></td>
-												<td><s:property value="#c.partId"/></td>
-											</tr>
-										</s:iterator>
+										
 									</tbody>
 								</table>
 
@@ -134,8 +138,11 @@
 								</div>
 
 								<div class="btn-group"
-									style="margin: auto; width: 480px; text-align: right;">
-									<button class="btn btn-primary btn-middle btn-danger">
+									style="margin: auto; text-align: right;">
+									<button class="btn btn-primary btn-middle btn-danger" id="showAtt">
+										显示
+									</button>
+									<button class="btn btn-primary btn-middle btn-danger" id="addSeclet">
 										添加选中附件
 									</button>
 								</div>
@@ -144,13 +151,19 @@
 
 						</div>
 
-						<div class="modal-footer">
+					</div>
+			
+					<div class="modal-footer">
+						
+						<div class="container-fluid">
+								
 							<div>
+								
 								<table class="table table-hover table-bordered"
 									pa_ui_name="table,exinput" pa_ui_hover="true"
 									pa_ui_selectable="true" pa_ui_select_mode="multi"
 									pa_ui_select_trigger="tr" pa_ui_select_column="0"
-									pa_ui_select_triggerelement=":checkbox">
+									pa_ui_select_triggerelement=":checkbox" id="selectTable">
 									<caption>
 										<h3>
 											·选中附件列表
@@ -162,10 +175,13 @@
 												选择
 											</th>
 											<th>
-												ID
+												msgId
 											</th>
 											<th>
 												文件名
+											</th>
+											<th>
+												url
 											</th>
 											<th>
 												partId
@@ -173,33 +189,29 @@
 										</tr>
 									</thead>
 									<tbody>
-										<s:iterator value="msgs" var="c">
-											<tr>
-												<td><intput type="checkbox"></intput></td>
-												<td><s:property value="#c.msgId"/></td>
-												<td><s:property value="#c.filename"/></td>
-												<td><s:property value="#c.partId"/></td>
-											</tr>
-										</s:iterator>
+										
 									</tbody>
 								</table>
-							</div>
 
-							<div class="btn-group"
-								style="margin: auto; width: 480px; text-align: right;">
-								<button class="btn btn-primary btn-middle btn-danger" id="deleteEx">
-									删除选中附件
-								</button>
-								<button class="btn btn-primary btn-middle btn-danger" id="submitModal">
-									确认
-								</button>
+								<div class="btn-group"
+									style="margin: auto; text-align: right;">
+									<button class="btn btn-primary btn-middle btn-danger" id="deleteSelect">
+										删除选中附件
+									</button>
+									<button class="btn btn-primary btn-middle btn-danger" id="submitModal">
+										确认
+									</button>
+								</div>
+								
 							</div>
-
+							
 						</div>
+
 					</div>
-				</form>
+				
 			
 		</div>
 
 	</body>
+	
 </html>

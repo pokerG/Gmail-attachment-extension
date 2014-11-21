@@ -25,9 +25,17 @@ function addModal(parent) {
 		url = chrome.extension.getURL("/images/closeModal.png");
 		clsbut.setAttribute("src", url);
 		clsbut.setAttribute("align", "right");
+		clsbut.setAttribute("class", "clB");
+		clsbut.setAttribute("tabindex", "1");
+		clsbut.setAttribute("role", "button");
+		clsbut.setAttribute("aria-pressed", "false");
+		clsbut.setAttribute("aria-haspopup", "true");
+		clsbut.setAttribute("aria-expanded", "false");
+		clsbut.setAttribute("style", "-webkit-user-select: none;");
 			clsbut.onclick = function() {
 				body.removeChild(divBack);
 				body.removeChild(divIframe);
+				selected.splice(0, selected.length);
 			}
 		divIframe.appendChild(clsbut);
 		
@@ -40,11 +48,6 @@ function addModal(parent) {
 			var iframeURL = chrome.extension.getURL('../addEx.html');
 			ifr.setAttribute("src", iframeURL);
 		divIframe.appendChild(ifr);
-		
 	body.appendChild(divIframe);
-
-
 	}
 }
-
-
