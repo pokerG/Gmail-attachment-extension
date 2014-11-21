@@ -4,14 +4,15 @@
     "version": "1.0",
     "description": "管理你的gmail附件",
 
-    "page_action": {  //Oauth认证
-        "default_icon": "images/mail_open.png" ,
-        "default_title" : "Gmail Attachment Management",
-        "default_popup": "popup.html"
-    },
+    // "page_action": {  //Oauth认证
+    //     "default_icon": "images/mail_open.png" ,
+    //     "default_title" : "Gmail Attachment Management",
+    //     "default_popup": "popup.html"
+    // },
 
     "background": {
-        "scripts": ["js/background.js"],
+        "page": "background.html",
+        // "scripts": ["js/background.js"],
         "persistent": false
     },
 
