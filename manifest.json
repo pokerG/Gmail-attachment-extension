@@ -28,7 +28,7 @@
     "content_scripts": [
         {
             "matches": ["*://mail.google.com/*"],
-            "js": ["js/content.js","js/addBtn.js","js/attach.js","js/addModal.js", "js/showAtt.js"]
+            "js": ["js/jquery-1.11.1.min.js", "js/bootstrap.js", "js/content.js", "js/showAtt.js", "js/addBtn.js","js/attach.js","js/addModal.js"]
         },
         {
             "matches": ["http://www.google.com/robots.txt*"],
@@ -48,6 +48,10 @@
         "js/getik.js",
         "addEx.html",
         "js/bootstrap.js",
-        "js/layer.min.js"
+        "js/layer.min.js",
+        "css/bootstrap.css",
+        "css/bootstrap.min.css",
+        "css/bootstrap-responsive.css",
+        "css/bootstrap-responsive.min.css"
     ]
 }

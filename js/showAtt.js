@@ -27,7 +27,7 @@ Array.prototype.contain = function(val) {
     }
 };
 
-showAtt.click=function addAtt(att){
+function addAtt(att){
   var searchTable=document.getElementById('attTable');
   var row=searchTable.insertRow();
   var c0=row.insertCell(0);
@@ -58,6 +58,7 @@ function addSel(att){
 }
 
 function showAtt() {
+	alert("add");
 	var inf;
 	if (document.getElementById("attTable").rows.length > 1)
 		return;
@@ -67,7 +68,7 @@ function showAtt() {
 	}
 }
 
-addSelect.onclick=function addSeclet() {
+function addSeclet() {
 	var flag=0;
 	var selectTable=document.getElementById('selectTable');
 	var ch=document.getElementsByName('attCheck');
@@ -89,7 +90,7 @@ addSelect.onclick=function addSeclet() {
    }
 }
 
-deleteSelect.onclick=function deleteSelect(){
+function deleteSelect(){
   var flag=0;
 	var selectTable=document.getElementById('selectTable');
 	//alert(selectTable);
@@ -111,6 +112,6 @@ deleteSelect.onclick=function deleteSelect(){
    }
 }
 
-submitModal.onclick=function submitModal() {
+function submitModal() {
 	
 }
