@@ -55,5 +55,6 @@ function attachClick(e) {
 	getAttach();
 	//addAttachment();
 	addModal(document);
+	showAtt();
 	// getStorage();
 }
