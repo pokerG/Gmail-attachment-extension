@@ -31,7 +31,8 @@ function getAttach() {
 					},function(response){});	
 				}*/
 		}
-
+		addModal(document);
+		showAtt();
 	});
 }
 
@@ -88,12 +89,3 @@ function getStorage() {
 		d.appendChild(pdiv);
 	});
 }*/
-
-
-function addAttachment(){
-	chrome.extension.sendMessage({
-		cmd: "draft",
-	},function(){
-
-	});
-}

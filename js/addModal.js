@@ -170,7 +170,8 @@ function submitModal() {
 	chrome.extension.sendMessage({
 		cmd: "draft",
 		attachs: selected
-	},function(){
+	},function(response){
+		alert(response);
 	});
 	
 }

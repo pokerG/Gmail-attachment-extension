@@ -39,7 +39,8 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
       saveAs: true
     })
   } else if (message.cmd == "draft") {
-    createDraft(message.attachs);
+    df = createDraft(message.attachs);
+    sendResponse(df);
   }
 
 });
@@ -187,23 +188,16 @@ function createDraft(attachs) {
   var UPLOAD_URL = "https://www.googleapis.com/upload/gmail/v1/users/me/drafts?uploadType=media";
   var xhr = new XMLHttpRequest();
 
-  xhr.onreadystatechange = function(event) {
-    if (xhr.readyState == 4) {
-      if (xhr.status == 200) {
-        var ret = JSON.parse(xhr.responseText);
-        console.log(ret);
-      } else {
-        console.log(xhr.status);
-      }
-    }
-  };
-  xhr.open('POST', UPLOAD_URL, true);
+  xhr.open('POST', UPLOAD_URL, false);
   xhr.setRequestHeader('Content-Type', 'message/rfc822');
   // xhr.setRequestHeader('Content-Length',1611);
   var token = google.getAccessToken();
   xhr.setRequestHeader('Authorization', 'OAuth ' + token);
   data = setData(attachs);
   xhr.send(data);
+  var ret = JSON.parse(xhr.responseText);
+  return ret;
+
 }
 
 function setData(attachs) {
