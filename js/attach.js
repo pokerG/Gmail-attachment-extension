@@ -21,7 +21,11 @@ function getAttach() {
 					partId: response[i].partId,
 					mimeType: response[i].mimeType,
 					attachmentId: response[i].attachmentId,
-					size : response[i].size,
+					subject: response[i].subject,
+					from: response[i].from,
+					to: response[i].to,
+					date: response[i].date,
+					size: response[i].size,
 					url: url
 				}
 				/*if(i == 0){

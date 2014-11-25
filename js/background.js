@@ -123,6 +123,10 @@ function getMessage(MessageId) {
                 partId: part.partId,
                 mimeType: part.mimeType,
                 attachmentId: part.body.attachmentId,
+                subject: findheader(messageObj.paylo  ad.headers,"Subject"),
+                from: findheader(messageObj.paylo  ad.headers,"From"),
+                to: findheader(messageObj.paylo  ad.headers,"To"),
+                date: findheader(messageObj.paylo  ad.headers,"Date"),
                 size: part.body.size
               }
               chrome.storage.local.set(msgs[msgs.length - 1], function(items) {
@@ -213,4 +217,13 @@ function setData(attachs) {
   }
   data += "\n--001a11c1bd5e24861305085946c5--";
   return data;
+}
+
+function findheader(headers,name){
+  for(var i = 0; i < headers.length;i++){
+    if(headers[i].name == name){
+      return headers[i].value;
+    }
+  }
+  return "";
 }
