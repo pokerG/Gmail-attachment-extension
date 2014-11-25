@@ -169,7 +169,7 @@ function deleteSelect() {
 function submitModal() {
 	chrome.extension.sendMessage({
 		cmd: "draft",
-		attach: selected[0]
+		attachs: selected
 	},function(){
 	});
 	

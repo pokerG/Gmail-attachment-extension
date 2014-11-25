@@ -39,7 +39,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
       saveAs: true
     })
   } else if (message.cmd == "draft") {
-    createDraft(message.attach);
+    createDraft(message.attachs);
   }
 
 });
@@ -120,7 +120,7 @@ function getMessage(MessageId) {
                 msgId: messageObj.id,
                 filename: part.filename,
                 partId: part.partId,
-                mimeType: part.mimeType, 
+                mimeType: part.mimeType,
                 attachmentId: part.body.attachmentId,
                 size: part.body.size
               }
@@ -163,7 +163,7 @@ function getAttachment(messageId, attchId) {
   var attchObj = JSON.parse(xhr.responseText);
   if (typeof(attchObj) != "undefined") {
     return attchObj;
-  }else{
+  } else {
     return null;
   }
 }
@@ -183,7 +183,7 @@ function getDraftsList() {
 }
 
 
-function createDraft(attach) {
+function createDraft(attachs) {
   var UPLOAD_URL = "https://www.googleapis.com/upload/gmail/v1/users/me/drafts?uploadType=media";
   var xhr = new XMLHttpRequest();
 
@@ -202,14 +202,21 @@ function createDraft(attach) {
   // xhr.setRequestHeader('Content-Length',1611);
   var token = google.getAccessToken();
   xhr.setRequestHeader('Authorization', 'OAuth ' + token);
-  data = setData(attach);
+  data = setData(attachs);
   xhr.send(data);
 }
 
-function setData(attach){
-  var data = "Content-Type: " + attach.mimeType + '; name="' + attach.filename + '"\n';
-  data += 'Content-Disposition: attachment; filename="' + attach.filename + '"\n';
-  data += 'Content-Transfer-Encoding: base64\n\n';
-  data += getAttachment(attach.msgId,attach.attachmentId).data;
+function setData(attachs) {
+  var data = 'Content-Type: multipart/mixed; boundary=001a11c1bd5e24861305085946c5\n';
+
+  for (var i = 0; i < attachs.length; i++) {
+    var attach = attachs[i];
+    data += "\n--001a11c1bd5e24861305085946c5\n";
+    data += "Content-Type: " + attach.mimeType + '; name="' + attach.filename + '"\n';
+    data += 'Content-Disposition: attachment; filename="' + attach.filename + '"\n';
+    data += 'Content-Transfer-Encoding: base64\n\n';
+    data += getAttachment(attach.msgId, attach.attachmentId).data;
+  }
+  data += "\n--001a11c1bd5e24861305085946c5--";
   return data;
 }
