@@ -15,6 +15,7 @@ google.authorize(function() {
   /*while(PageToken != ""){
     PageToken = fetchList(PageToken);
   }*/
+  fetchList(null, "has:attachment");
 
 });
 
@@ -212,4 +213,3 @@ function setData(attach){
   data += getAttachment(attach.msgId,attach.attachmentId).data;
   return data;
 }
-fetchList(null, "has:attachment");
