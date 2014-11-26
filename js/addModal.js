@@ -80,8 +80,11 @@ function page() {
 }
 
 function desPage() {
+	var pre=document.getElementById("prevPage");
+	pre.disabled=false;
 	if (pageNum == 0) 
-		alert("无前一页!");
+		pre.disbled=true;
+		//alert("无前一页!");
 	else {
 		pageNum--;
 		//alert(pageNum);
@@ -90,9 +93,12 @@ function desPage() {
 }
 
 function incPage() {
+	var nex=document.getElementById("nextPage");
+	nex.disabled=false;
 	var searchTable = document.getElementById('attTable');
 	if (Math.ceil((searchTable.rows.length - 1) / pageAttNum) == pageNum + 1)
-		alert("无后一页");
+		nex.disabled=true;
+		//alert("无后一页");
 	else {
 		pageNum++;
 		//alert(pageNum);
@@ -167,7 +173,11 @@ function submitModal() {
 	},function(response){
 		alert(response);
 	});
-	
+	//创建草稿后关闭
+	body.removeChild(document.getElementById("divBack"));
+	body.removeChild(document.getElementById("divmodal"));
+	selected.splice(0, selected.length);
+	selIndex.splice(0, selIndex.length);
 }
 
 //下载附件
@@ -187,6 +197,7 @@ function addModal(parent) {
 	if (existModal == null) {
 
 		var divBack = document.createElement("div");
+		divBack.setAttribute("id", "divBack");
 		divBack.setAttribute("class", "KA Kj-JD-Jh");
 		divBack.setAttribute("style", "opacity: 0.6; width: 1366px; height: 800px; background-color:gray;");
 		divBack.setAttribute("aria-hidden", "true");
@@ -196,7 +207,7 @@ function addModal(parent) {
 		divIframe.setAttribute("class", "KA Kj-JD picker-dialog");
 		divIframe.setAttribute("id", "divmodal");
 		divIframe.setAttribute("role", "dialog");
-		divIframe.setAttribute("style", "margin:0px auto; width:1020px; width:520px overflow:auto; left:150px; top:50px; border:2px solid gray; overflow:auto");
+		divIframe.setAttribute("style", "margin:0px auto; width:1020px; overflow:auto; left:150px; top:50px; border:2px solid gray; overflow:auto");
 		divIframe.border = "0px";
 
 		var clsbut = document.createElement("img");
@@ -238,13 +249,13 @@ function addModal(parent) {
 		install += "<div class='input-append'><input type='text' value='要搜索的附件...' class='span10'>";
 		install += "<button type='submit' class='btn btn-primary btn-middle btn-danger'>搜索</button></form></div></div>";
 		install += "<div class='container-fluid' id='exArea'><div id='ex'><table class='table table-hover table-bordered'pa_ui_name='table,exinput' pa_ui_hover='true'pa_ui_selectable='true' pa_ui_select_mode='multi'pa_ui_select_trigger='tr' pa_ui_select_column='0'pa_ui_select_triggerelement=':checkbox' id='attTable'><caption><h3>附件列表</h3></caption>";
-		install += "<thead><tr><th>选择</th><th>附件名</th><th>附件类型</th><th>附件大小</th></tr></thead><tbody></tbody></table>";
+		install += "<thead><tr><th>选择</th><th>附件名</th><th>附件类型</th><th>附件大小</th><th>Subject</th><th>From</th><th>To</th><th>Date</th></tr></thead><tbody></tbody></table>";
 		install += "<div class='pagination'style='margin: auto; width: 480px; text-align: center;'><ul id='changePage'><li><a href='#' style='color: white; background-color: #ee5f5b;' id='prevPage'>";
 		install += "Prev</a></li><li><a href='#' style='color: blue;' id='nowPage'>1</a></li><li><a href='#' style='color: white; background-color: #ee5f5b;' id='nextPage'>Next</a></li></ul></div><div class='btn-group'style='margin: auto; text-align: right;'>";
 		install += "<button class='btn btn-primary btn-middle btn-danger' id='addSeclet'>添加选中附件</button></div></div></div></div>";
 		install += "<div class='modal-footer'><div><div><table class='table table-hover table-bordered'pa_ui_name='table,exinput' pa_ui_hover='true'pa_ui_selectable='true' pa_ui_select_mode='multi'pa_ui_select_trigger='tr' pa_ui_select_column='0'pa_ui_select_triggerelement=':checkbox' id='selectTable'><caption><h3>选中附件列表</h3>";
-		install += "</caption><thead><tr><th>选择</th><th>附件名</th><th>附件类型</th><th>附件大小</th></tr></thead><tbody></tbody></table>";
-		install += "<div class='btn-group'style='margin: auto; text-align: right;'><button class='btn btn-primary btn-middle btn-danger' id='deleteSelect'>删除选中附件</button><button class='btn btn-primary btn-middle btn-danger' id='submitModal'>添加选中附件到邮件</button><button class='btn btn-primary btn-middle btn-danger' id='download'>下载选中附件</button></div></div></div></div></div></div>";
+		install += "</caption><thead><tr><th>选择</th><th>附件名</th><th>附件类型</th><th>附件大小</th><th>Subject</th><th>From</th><th>To</th><th>Date</th></tr></thead><tbody></tbody></table>";
+		install += "<div class='btn-group'style='margin: auto; text-align: right;'><button class='btn btn-primary btn-middle btn-danger' id='deleteSelect'>删除选中附件</button><button class='btn btn-primary btn-middle btn-danger' id='submitModal'>创建草稿</button><button class='btn btn-primary btn-middle btn-danger' id='download'>下载选中附件</button></div></div></div></div></div></div>";
 
 		//alert(install);
 		$("div#divmodal").append(install);
