@@ -4,9 +4,18 @@
  * @return {[DOM Element]}        [插入的按钮]
  */
 
-function insert_btn(parent) {
-	node = parent.firstChild;
+/**
+ * [插入附件管理按钮]
+ * @param  {DOM Element} parent 插入的位置
+ * @param  {Boolean} down   是否需要再往下一层
+ * @return {DOM Element}        插入的按钮
+ */
+function insert_btn(parent,down) {
 
+	node = parent.firstChild;
+	if(down){
+		node = node.firstChild;
+	}
 	var element = document.createElement("img");
 	url = chrome.extension.getURL("/images/mail_open.png");
 	element.setAttribute("src", url);
@@ -32,7 +41,7 @@ document.onmousemove = function() {
 	if (node != null) {
 		element = node.querySelector('#ab32');
 		if (element == null)
-			insert_btn(node);
+			insert_btn(node,false);
 	}
 
 	nodes = document.querySelectorAll('.aqL');
@@ -40,7 +49,7 @@ document.onmousemove = function() {
 		if (nodes[i] != null) {
 			element = nodes[i].querySelector('#ab32');
 			if (element == null)
-				insert_btn(nodes[i]);
+				insert_btn(nodes[i],true);
 		}
 	}
 }
