@@ -1,4 +1,4 @@
-var google = new OAuth2('google', {
+﻿var google = new OAuth2('google', {
   client_id: '722713518095-tpo9ibi81nts4fhpgf415m1e84h4rddq.apps.googleusercontent.com',
   client_secret: 'BfodvtWGmuvP64FkH1lQWcoA',
   api_scope: ['https://mail.google.com/',
