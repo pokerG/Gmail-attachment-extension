@@ -14,12 +14,6 @@ Array.prototype.indexOf = function(val) {
 	}
 	return -1;
 };
-Array.prototype.remove = function(val) {
-	var index = this.indexOf(val);
-	if (index > -1) {
-		this.splice(index, 1);
-	}
-};
 Array.prototype.contain = function(val) {
 	var index = this.indexOf(val);
 	if (index > -1) {
@@ -153,8 +147,8 @@ function deleteSelect() {
 		var index = tr.rowIndex;
 		if (ch[i].checked == true) {
 			//alert(selIndex[i]);
-			selected.remove(selIndex[i]);
-			selIndex.remove(selIndex[i]);
+			selected.splice(i,1);
+			selIndex.splice(i,1);
 			selectTable.deleteRow(index);
 			flag++;
 		}
