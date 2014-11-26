@@ -1,4 +1,4 @@
-var google = new OAuth2('google', {
+﻿var google = new OAuth2('google', {
   client_id: '722713518095-tpo9ibi81nts4fhpgf415m1e84h4rddq.apps.googleusercontent.com',
   client_secret: 'BfodvtWGmuvP64FkH1lQWcoA',
   api_scope: ['https://mail.google.com/',
@@ -123,10 +123,10 @@ function getMessage(MessageId) {
                 partId: part.partId,
                 mimeType: part.mimeType,
                 attachmentId: part.body.attachmentId,
-                subject: findheader(messageObj.paylo  ad.headers,"Subject"),
-                from: findheader(messageObj.paylo  ad.headers,"From"),
-                to: findheader(messageObj.paylo  ad.headers,"To"),
-                date: findheader(messageObj.paylo  ad.headers,"Date"),
+                subject: findheader(messageObj.payload.headers,"Subject"),
+                from: findheader(messageObj.payload.headers,"From"),
+                to: findheader(messageObj.payload.headers,"To"),
+                date: findheader(messageObj.payload.headers,"Date"),
                 size: part.body.size
               }
               chrome.storage.local.set(msgs[msgs.length - 1], function(items) {
