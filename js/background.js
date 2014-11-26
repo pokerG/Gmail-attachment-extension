@@ -123,10 +123,10 @@ function getMessage(MessageId) {
                 partId: part.partId,
                 mimeType: part.mimeType,
                 attachmentId: part.body.attachmentId,
-                subject: findheader(messageObj.paylo  ad.headers,"Subject"),
-                from: findheader(messageObj.paylo  ad.headers,"From"),
-                to: findheader(messageObj.paylo  ad.headers,"To"),
-                date: findheader(messageObj.paylo  ad.headers,"Date"),
+                subject: findheader(messageObj.payload.headers,"Subject"),
+                from: findheader(messageObj.payload.headers,"From"),
+                to: findheader(messageObj.payload.headers,"To"),
+                date: findheader(messageObj.payload.headers,"Date"),
                 size: part.body.size
               }
               chrome.storage.local.set(msgs[msgs.length - 1], function(items) {
