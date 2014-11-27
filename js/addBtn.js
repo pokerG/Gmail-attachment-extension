@@ -1,10 +1,4 @@
 /**
- * 向邮件插入搜索附件的按钮
- * @param  {[DOM Element]} parent [新建邮件的div或document]
- * @return {[DOM Element]}        [插入的按钮]
- */
-
-/**
  * [插入附件管理按钮]
  * @param  {DOM Element} parent 插入的位置
  * @param  {Boolean} down   是否需要再往下一层
@@ -19,6 +13,7 @@ function insert_btn(parent,down) {
 	var element = document.createElement("img");
 	url = chrome.extension.getURL("/images/mail_open.png");
 	element.setAttribute("src", url);
+	element.setAttribute("alt","附件管理");
 	element.setAttribute("name", "attachBtn");
 	element.setAttribute("id", "ab32");
 	element.setAttribute("class", "atB");

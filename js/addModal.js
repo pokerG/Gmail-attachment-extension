@@ -24,12 +24,12 @@ Array.prototype.contain = function(val) {
 };
 
 function changeSize(size) {
-	if (size < Math.pow(1024,2))
-		return((size / 1024).toFixed(2) + "KB");
-	else if (size < Math.pow(1024,3))
-		return((size / Math.pow(1024,2)).toFixed(2) + "MB");
+	if (size < Math.pow(1024, 2))
+		return ((size / 1024).toFixed(2) + "KB");
+	else if (size < Math.pow(1024, 3))
+		return ((size / Math.pow(1024, 2)).toFixed(2) + "MB");
 	else
-		return((size / Math.pow(1024,3)).toFixed(2) + "GB");
+		return ((size / Math.pow(1024, 3)).toFixed(2) + "GB");
 }
 
 function addAtt(att) {
@@ -43,7 +43,7 @@ function addAtt(att) {
 	c1.innerHTML = att.filename;
 	c2.innerHTML = att.mimeType;
 	c3.innerHTML = changeSize(att.size);
-	return(row);
+	return (row);
 }
 
 function addSel(att) {
@@ -62,7 +62,7 @@ function addSel(att) {
 //分页
 function page() {
 	var searchTable = document.getElementById('attTable');
-	var pageLen,st,ed,row,i;
+	var pageLen, st, ed, row, i;
 	for (i = 1; i < searchTable.rows.length; i++) {
 		row = searchTable.rows[i];
 		row.style.display = "none";
@@ -73,18 +73,18 @@ function page() {
 	if (searchTable.rows.length - 1 < ed)
 		ed = searchTable.rows.length - 1;
 	for (i = st; i < ed; i++) {
-		row = document.getElementById("att"+i); 
+		row = document.getElementById("att" + i);
 		row.style.display = searchTable.style.display;
 	}
-	document.getElementById("nowPage").innerHTML=pageNum+1;
+	document.getElementById("nowPage").innerHTML = pageNum + 1;
 }
 
 function desPage() {
-	var pre=document.getElementById("prevPage");
-	pre.disabled=false;
-	if (pageNum == 0) 
-		pre.disbled=true;
-		//alert("无前一页!");
+	var pre = document.getElementById("prevPage");
+	pre.disabled = false;
+	if (pageNum == 0)
+		pre.disbled = true;
+	//alert("无前一页!");
 	else {
 		pageNum--;
 		//alert(pageNum);
@@ -93,12 +93,12 @@ function desPage() {
 }
 
 function incPage() {
-	var nex=document.getElementById("nextPage");
-	nex.disabled=false;
+	var nex = document.getElementById("nextPage");
+	nex.disabled = false;
 	var searchTable = document.getElementById('attTable');
 	if (Math.ceil((searchTable.rows.length - 1) / pageAttNum) == pageNum + 1)
-		nex.disabled=true;
-		//alert("无后一页");
+		nex.disabled = true;
+	//alert("无后一页");
 	else {
 		pageNum++;
 		//alert(pageNum);
@@ -112,8 +112,8 @@ function showAtt() {
 	if (document.getElementById("attTable").rows.length > 1)
 		return;
 	for (var i = 0; i < attach.length; i++) {
-		row=addAtt(attach[i]);
-		row.id="att"+i;
+		row = addAtt(attach[i]);
+		row.id = "att" + i;
 		//alert(row.id);
 	}
 	page();
@@ -134,7 +134,7 @@ function addSeclet() {
 				//alert(selIndex);
 			}
 			flag++;
-			ch[i].checked=false;
+			ch[i].checked = false;
 		}
 	}
 	if (flag <= 0) {
@@ -153,8 +153,8 @@ function deleteSelect() {
 		var index = tr.rowIndex;
 		if (ch[i].checked == true) {
 			//alert(selIndex[i]);
-			selected.splice(i,1);
-			selIndex.splice(i,1);
+			selected.splice(i, 1);
+			selIndex.splice(i, 1);
 			selectTable.deleteRow(index);
 			flag++;
 		}
@@ -165,12 +165,35 @@ function deleteSelect() {
 	}
 }
 
+function search() {
+	var keyword = document.querySelector('#keyword').value;
+
+	var at = document.getElementById("attTable")
+	var rowNum = at.rows.length
+	for (var i = rowNum - 1; i > 0; i--) {
+		at.deleteRow(i);
+	}
+	if (keyword != "") {
+		reg = eval("/" + keyword + "/ig");
+		for (var i = 0; i < attach.length; i++) {
+			if (attach[i].filename.search(reg) != -1) {
+				addAtt(attach[i]);
+			}
+		}
+		// page();
+	}else{
+		showAtt();
+	}
+
+
+}
+
 //添加附件
 function submitModal() {
 	chrome.extension.sendMessage({
 		cmd: "draft",
 		attachs: selected
-	},function(response){
+	}, function(response) {
 		alert(response);
 	});
 	//创建草稿后关闭
@@ -246,8 +269,8 @@ function addModal(parent) {
 		var install = "<div id='iframemodal'><br/><br/><div class='row' style='margin:0px auto; width:1000px; height:500px;'>";
 		install += "<div class='modal-footer' style='background-color:white;'>";
 		install += "<div><div class='span10'><form class='form-search'>";
-		install += "<div class='input-append'><input type='text' value='要搜索的附件...' class='span10'>";
-		install += "<button type='submit' class='btn btn-primary btn-middle btn-danger'>搜索</button></form></div></div>";
+		install += "<div class='input-append'><input id='keyword' type='text' value='要搜索的附件...' class='span10'>";
+		install += "<button id = 'search' type='submit' class='btn btn-primary btn-middle btn-danger'>搜索</button></form></div></div>";
 		install += "<div class='container-fluid' id='exArea'><div id='ex'><table class='table table-hover table-bordered'pa_ui_name='table,exinput' pa_ui_hover='true'pa_ui_selectable='true' pa_ui_select_mode='multi'pa_ui_select_trigger='tr' pa_ui_select_column='0'pa_ui_select_triggerelement=':checkbox' id='attTable'><caption><h3>附件列表</h3></caption>";
 		install += "<thead><tr><th>选择</th><th>附件名</th><th>附件类型</th><th>附件大小</th><th>Subject</th><th>From</th><th>To</th><th>Date</th></tr></thead><tbody></tbody></table>";
 		install += "<div class='pagination'style='margin: auto; width: 480px; text-align: center;'><ul id='changePage'><li><a href='#' style='color: white; background-color: #ee5f5b;' id='prevPage'>";
@@ -259,12 +282,13 @@ function addModal(parent) {
 
 		//alert(install);
 		$("div#divmodal").append(install);
+		document.getElementById("search").addEventListener("click", search, false);
 		document.getElementById("addSeclet").addEventListener("click", addSeclet, false);
 		document.getElementById("deleteSelect").addEventListener("click", deleteSelect, false);
 		document.getElementById("prevPage").addEventListener("click", desPage, false);
 		document.getElementById("nextPage").addEventListener("click", incPage, false);
 		document.getElementById("submitModal").addEventListener("click", submitModal, false);
 		document.getElementById("download").addEventListener("click", download, false);
-		
+
 	}
 }
