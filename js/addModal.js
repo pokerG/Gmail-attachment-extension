@@ -7,6 +7,7 @@ var selected = new Array(); //存储选中的附件
 var selIndex = new Array(); //存储选中的附件索引号
 var pageAttNum = 10;
 var pageNum = 0;
+var keyFlag = 1;
 
 Array.prototype.indexOf = function(val) {
 	for (var i = 0; i < this.length; i++) {
@@ -34,29 +35,49 @@ function changeSize(size) {
 
 function addAtt(att) {
 	var searchTable = document.getElementById('attTable');
+	var file = new Array();
+	file = att.filename.split('.');
 	var row = searchTable.insertRow();
 	var c0 = row.insertCell(0);
 	var c1 = row.insertCell(1);
 	var c2 = row.insertCell(2);
 	var c3 = row.insertCell(3);
+	var c4 = row.insertCell(4);
+	var c5 = row.insertCell(5);
+	var c6 = row.insertCell(6);
+	var c7 = row.insertCell(7);
 	c0.innerHTML = "<input type='checkbox' name='attCheck' />";
-	c1.innerHTML = att.filename;
-	c2.innerHTML = att.mimeType;
+	c1.innerHTML = file[0];
+	c2.innerHTML = file[1];
 	c3.innerHTML = changeSize(att.size);
+	c4.innerHTML = att.subject;
+	c5.innerHTML = att.from;
+	c6.innerHTML = att.to;
+	c7.innerHTML = att.date;
 	return (row);
 }
 
 function addSel(att) {
 	var searchTable = document.getElementById('selectTable');
+	var file = new Array();
+	file = att.filename.split('.');
 	var row = searchTable.insertRow();
 	var c0 = row.insertCell(0);
 	var c1 = row.insertCell(1);
 	var c2 = row.insertCell(2);
 	var c3 = row.insertCell(3);
+	var c4 = row.insertCell(4);
+	var c5 = row.insertCell(5);
+	var c6 = row.insertCell(6);
+	var c7 = row.insertCell(7);
 	c0.innerHTML = "<input type='checkbox' name='selCheck' />";
-	c1.innerHTML = att.filename;
-	c2.innerHTML = att.mimeType;
+	c1.innerHTML = file[0];
+	c2.innerHTML = file[1];
 	c3.innerHTML = changeSize(att.size);
+	c4.innerHTML = att.subject;
+	c5.innerHTML = att.from;
+	c6.innerHTML = att.to;
+	c7.innerHTML = att.date;
 }
 
 //分页
@@ -166,41 +187,59 @@ function deleteSelect() {
 }
 
 function search() {
+	
+	var row;
+	
+	var changePage = document.getElementById("changePage");
+	
 	var keyword = document.querySelector('#keyword').value;
 
 	var at = document.getElementById("attTable")
 	var rowNum = at.rows.length
-	for (var i = rowNum - 1; i > 0; i--) {
-		at.deleteRow(i);
+	for (var i = rowNum - 2; i >= 0; i--) {
+		row = document.getElementById("att" + i);
+		row.style.display = "none";
 	}
-	if (keyword != "") {
+	if (keyword != "要搜索的附件...") {
 		reg = eval("/" + keyword + "/ig");
 		for (var i = 0; i < attach.length; i++) {
 			if (attach[i].filename.search(reg) != -1) {
-				addAtt(attach[i]);
+				//addAtt(attach[i]);
+				row = document.getElementById("att" + i);
+				row.style.display = at.style.display;
 			}
 		}
+		changePage.style.display = "none";
 		// page();
 	}else{
-		showAtt();
+		pageNum = 0;
+		page();
+		changePage.style.display = "";
 	}
-
-
 }
+
 
 //添加附件
 function submitModal() {
+	body.removeChild(document.getElementById("divBack"));
+	body.removeChild(document.getElementById("divmodal"));
+	var loading = document.createElement("div");
+	loading.setAttribute("class", "KA Kj-JD picker-dialog");
+	loading.setAttribute("id", "loading");
+	loading.setAttribute("role", "dialog");
+	loading.setAttribute("style", "margin:0px auto; width:120px; height:20px;overflow:auto; left:450px; top:80px; background: #fff1a8; border:1px solid #ccc; overflow:auto");
+	loading.innerHTML="Loading...";
+	body.appendChild(loading);
+	body.removeChild(document.getElementById("loading")); //不知为什么删不掉loading框QAQ
 	chrome.extension.sendMessage({
 		cmd: "draft",
 		attachs: selected
 	}, function(response) {
 		alert(response);
 	});
-	//创建草稿后关闭
-	body.removeChild(document.getElementById("divBack"));
-	body.removeChild(document.getElementById("divmodal"));
 	selected.splice(0, selected.length);
 	selIndex.splice(0, selIndex.length);
+	
 }
 
 //下载附件
@@ -211,6 +250,21 @@ function download() {
 			url: selected[i].url
 		}, function(response) {});
 	}
+}
+
+function showKey() {
+	var keyword = document.getElementById('keyword');
+	if(keyword.value == '要搜索的附件...' && keyFlag == 1)
+		keyword.value = '';
+}
+
+function disKey() {
+	var keyword = document.getElementById('keyword');
+	if(!keyword.value) {
+		keyword.value = '要搜索的附件...';
+		keyFlag = 1;
+	}else 
+		keyFlag = 0;
 }
 
 function addModal(parent) {
@@ -270,14 +324,14 @@ function addModal(parent) {
 		install += "<div class='modal-footer' style='background-color:white;'>";
 		install += "<div><div class='span10'><form class='form-search'>";
 		install += "<div class='input-append'><input id='keyword' type='text' value='要搜索的附件...' class='span10'>";
-		install += "<button id = 'search' type='submit' class='btn btn-primary btn-middle btn-danger'>搜索</button></form></div></div>";
+		install += "<button id = 'search'  class='btn btn-primary btn-middle btn-danger'>搜索</button></form></div></div>";
 		install += "<div class='container-fluid' id='exArea'><div id='ex'><table class='table table-hover table-bordered'pa_ui_name='table,exinput' pa_ui_hover='true'pa_ui_selectable='true' pa_ui_select_mode='multi'pa_ui_select_trigger='tr' pa_ui_select_column='0'pa_ui_select_triggerelement=':checkbox' id='attTable'><caption><h3>附件列表</h3></caption>";
-		install += "<thead><tr><th>选择</th><th>附件名</th><th>附件类型</th><th>附件大小</th><th>Subject</th><th>From</th><th>To</th><th>Date</th></tr></thead><tbody></tbody></table>";
+		install += "<thead><tr><th>选择</th><th>附件名</th><th>附件类型</th><th>附件大小</th><th>主题</th><th>发件人</th><th>收件人</th><th>日期</th></tr></thead><tbody></tbody></table>";
 		install += "<div class='pagination'style='margin: auto; width: 480px; text-align: center;'><ul id='changePage'><li><a href='#' style='color: white; background-color: #ee5f5b;' id='prevPage'>";
 		install += "Prev</a></li><li><a href='#' style='color: blue;' id='nowPage'>1</a></li><li><a href='#' style='color: white; background-color: #ee5f5b;' id='nextPage'>Next</a></li></ul></div><div class='btn-group'style='margin: auto; text-align: right;'>";
 		install += "<button class='btn btn-primary btn-middle btn-danger' id='addSeclet'>添加选中附件</button></div></div></div></div>";
 		install += "<div class='modal-footer'><div><div><table class='table table-hover table-bordered'pa_ui_name='table,exinput' pa_ui_hover='true'pa_ui_selectable='true' pa_ui_select_mode='multi'pa_ui_select_trigger='tr' pa_ui_select_column='0'pa_ui_select_triggerelement=':checkbox' id='selectTable'><caption><h3>选中附件列表</h3>";
-		install += "</caption><thead><tr><th>选择</th><th>附件名</th><th>附件类型</th><th>附件大小</th><th>Subject</th><th>From</th><th>To</th><th>Date</th></tr></thead><tbody></tbody></table>";
+		install += "</caption><thead><tr><th>选择</th><th>附件名</th><th>附件类型</th><th>附件大小</th><th>主题</th><th>发件人</th><th>收件人</th><th>日期</th></tr></thead><tbody></tbody></table>";
 		install += "<div class='btn-group'style='margin: auto; text-align: right;'><button class='btn btn-primary btn-middle btn-danger' id='deleteSelect'>删除选中附件</button><button class='btn btn-primary btn-middle btn-danger' id='submitModal'>创建草稿</button><button class='btn btn-primary btn-middle btn-danger' id='download'>下载选中附件</button></div></div></div></div></div></div>";
 
 		//alert(install);
@@ -289,6 +343,8 @@ function addModal(parent) {
 		document.getElementById("nextPage").addEventListener("click", incPage, false);
 		document.getElementById("submitModal").addEventListener("click", submitModal, false);
 		document.getElementById("download").addEventListener("click", download, false);
+		document.getElementById("keyword").addEventListener("blur", disKey, false);
+		document.getElementById("keyword").addEventListener("focus", showKey, false);
 
 	}
 }
