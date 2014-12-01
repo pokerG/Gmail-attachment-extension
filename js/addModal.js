@@ -8,6 +8,7 @@ var selIndex = new Array(); //存储选中的附件索引号
 var searchIndex = new Array(); //存储搜索到的附件索引号
 var pageAttNum = 10;
 var pageNum = 0;
+var searchPageNum = 0;
 var keyFlag = 1;
 
 Array.prototype.indexOf = function(val) {
@@ -191,11 +192,60 @@ function deleteSelect() {
 	}
 }
 
+//搜索分页
+function doSearchPage() {
+	var searchTable = document.getElementById('attTable');
+	var pageLen, st, ed, row, i;
+	for (i = 1; i < searchTable.rows.length; i++) {
+		row = searchTable.rows[i];
+		row.style.display = "none";
+	}
+	var sNum = searchIndex.length;
+	st = searchPageNum * pageAttNum;
+	ed = st + pageAttNum;
+	if (sNum < ed)
+		ed = sNum;
+	//alert(st + " " + ed);
+	for (i = st; i < ed; i++) {
+		row = document.getElementById("att" + searchIndex[i]);
+		row.style.display = searchTable.style.display;
+	}
+	document.getElementById("searchNowPage").innerHTML = searchPageNum + 1;
+}
+
+function searchDesPage() {
+	var pre = document.getElementById("searchPrevPage");
+	pre.disabled = false;
+	if (searchPageNum == 0)
+		pre.disbled = true;
+	//alert("无前一页!");
+	else {
+		searchPageNum--;
+		//alert(pageNum);
+		doSearchPage();
+	}
+}
+
+function searchIncPage() {
+	var nex = document.getElementById("searchNextPage");
+	nex.disabled = false;
+	var searchTable = document.getElementById('attTable');
+	if (Math.ceil((searchIndex.length) / pageAttNum) == searchPageNum + 1)
+		nex.disabled = true;
+	//alert("无后一页");
+	else {
+		searchPageNum++;
+		//alert(pageNum);
+		doSearchPage();
+	}
+}
+
 function search() {
 	
 	var row;
 	
 	var changePage = document.getElementById("changePage");
+	var searchPage = document.getElementById("searchPage");
 	
 	var keyword = document.querySelector('#keyword').value;
 
@@ -206,20 +256,24 @@ function search() {
 		row.style.display = "none";
 	}
 	if (keyword != "要搜索的附件...") {
+		searchIndex.splice(0,searchIndex.length);
 		reg = eval("/" + keyword + "/ig");
 		for (var i = 0; i < attach.length; i++) {
 			if (attach[i].filename.search(reg) != -1) {
-				//addAtt(attach[i]);
-				row = document.getElementById("att" + i);
-				row.style.display = at.style.display;
+				searchIndex.push(i);
+				//row = document.getElementById("att" + i);
+				//row.style.display = at.style.display;
 			}
 		}
 		changePage.style.display = "none";
-		// page();
+		searchPage.style.display = "";
+		searchPageNum = 0;
+		doSearchPage();
 	}else{
 		pageNum = 0;
 		page();
 		changePage.style.display = "";
+		searchPage.style.display = "none";
 	}
 }
 
@@ -333,7 +387,8 @@ function addModal(parent) {
 		install += "<div class='container-fluid' id='exArea'><div id='ex'><table class='table table-hover table-bordered'pa_ui_name='table,exinput' pa_ui_hover='true'pa_ui_selectable='true' pa_ui_select_mode='multi'pa_ui_select_trigger='tr' pa_ui_select_column='0'pa_ui_select_triggerelement=':checkbox' id='attTable'><caption><h3>附件列表</h3></caption>";
 		install += "<thead><tr><th style='width:36px;'>选择</th><th>附件名</th><th style='width:72px;'>附件类型</th><th style='width:72px;'>附件大小</th><th style='width:144px;'>主题</th><th>发件人</th><th>收件人</th><th>日期</th></tr></thead><tbody></tbody></table>";
 		install += "<div class='pagination'style='margin: auto; width: 480px; text-align: center;'><ul id='changePage'><li><a href='#' style='color: white; background-color: #ee5f5b;' id='prevPage'>";
-		install += "Prev</a></li><li><a href='#' style='color: blue;' id='nowPage'>1</a></li><li><a href='#' style='color: white; background-color: #ee5f5b;' id='nextPage'>Next</a></li></ul></div><div class='btn-group'style='margin: auto; text-align: right;'>";
+		install += "Prev</a></li><li><a href='#' style='color: blue;' id='nowPage'>1</a></li><li><a href='#' style='color: white; background-color: #ee5f5b;' id='nextPage'>Next</a></li></ul><ul id='searchPage' style='display:none;'><li><a href='#' style='color: white; background-color: #ee5f5b;' id='searchPrevPage'>";
+		install += "Prev</a></li><li><a href='#' style='color: blue;' id='searchNowPage'>1</a></li><li><a href='#' style='color: white; background-color: #ee5f5b;' id='searchNextPage'>Next</a></li></ul></div><div class='btn-group'style='margin: auto; text-align: right;'>";
 		install += "<button class='btn btn-primary btn-middle btn-danger' id='addSeclet'>添加选中附件</button></div></div></div></div>";
 		install += "<div class='modal-footer'><div><div><table class='table table-hover table-bordered'pa_ui_name='table,exinput' pa_ui_hover='true'pa_ui_selectable='true' pa_ui_select_mode='multi'pa_ui_select_trigger='tr' pa_ui_select_column='0'pa_ui_select_triggerelement=':checkbox' id='selectTable'><caption><h3>选中附件列表</h3>";
 		install += "</caption><thead><tr><th style='width:36px; '>选择</th><th>附件名</th><th style='width:72px;'>附件类型</th><th style='width:72px;'>附件大小</th><th style='width:144px;'>主题</th><th>发件人</th><th>收件人</th><th>日期</th></tr></thead><tbody></tbody></table>";
@@ -346,6 +401,8 @@ function addModal(parent) {
 		document.getElementById("deleteSelect").addEventListener("click", deleteSelect, false);
 		document.getElementById("prevPage").addEventListener("click", desPage, false);
 		document.getElementById("nextPage").addEventListener("click", incPage, false);
+		document.getElementById("searchPrevPage").addEventListener("click", searchDesPage, false);
+		document.getElementById("searchNextPage").addEventListener("click", searchIncPage, false);
 		document.getElementById("submitModal").addEventListener("click", submitModal, false);
 		document.getElementById("download").addEventListener("click", download, false);
 		document.getElementById("keyword").addEventListener("blur", disKey, false);
