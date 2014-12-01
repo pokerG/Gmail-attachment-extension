@@ -5,6 +5,7 @@
 
 var selected = new Array(); //存储选中的附件
 var selIndex = new Array(); //存储选中的附件索引号
+var searchIndex = new Array(); //存储搜索到的附件索引号
 var pageAttNum = 10;
 var pageNum = 0;
 var keyFlag = 1;
@@ -163,7 +164,7 @@ function addSeclet() {
 		}
 	}
 	if (flag <= 0) {
-		alert("请选定要添加的附件！");
+		//alert("请选定要添加的附件！");
 	}
 }
 
@@ -186,7 +187,7 @@ function deleteSelect() {
 		//alert(selected);
 	}
 	if (flag <= 0) {
-		alert("请选定要删除的附件！");
+		//alert("请选定要删除的附件！");
 	}
 }
 
@@ -231,15 +232,15 @@ function submitModal() {
 	loading.setAttribute("class", "KA Kj-JD picker-dialog");
 	loading.setAttribute("id", "loadingModal");
 	loading.setAttribute("role", "dialog");
-	loading.setAttribute("style", "margin:0px auto; width:200px; height:32px;overflow:auto; left:450px; top:120px; background: #fff1a8; border-color: #f9edbe; overflow:auto; font-size:30px;");
-	loading.innerHTML="Loading...";
+	loading.setAttribute("style", "margin:0px auto; width:200px; height:22px;overflow:auto; left:450px; top:0px; background: #fff1a8; border-color: #f9edbe; overflow:auto; font-size:20px;");
+	loading.innerHTML="创建邮件...";
 	body.appendChild(loading);
 	chrome.extension.sendMessage({
 		cmd: "draft",
 		attachs: selected
 	}, function(response) {
-		body.removeChild(document.getElementById("loadingModal"));
-		alert("带附件邮件创建完毕！");
+		loading.innerHTML="创建成功...";
+		setTimeout(function(){body.removeChild(document.getElementById("loadingModal"));}, 1000);
 	});
 	selected.splice(0, selected.length);
 	selIndex.splice(0, selIndex.length);
