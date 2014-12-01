@@ -51,13 +51,13 @@ function addAtt(att) {
 	var c6 = row.insertCell(6);
 	var c7 = row.insertCell(7);
 	c0.innerHTML = "<input type='checkbox' name='attCheck' />";
-	c1.innerHTML = att.filename;
-	c2.innerHTML = file[1];
-	c3.innerHTML = changeSize(att.size);
-	c4.innerHTML = att.subject;
-	c5.innerHTML = att.from;
-	c6.innerHTML = att.to;
-	c7.innerHTML = dat[0];
+	c2.innerHTML = att.filename;
+	c1.innerHTML = file[1];
+	c7.innerHTML = changeSize(att.size);
+	c3.innerHTML = att.subject;
+	c4.innerHTML = att.from;
+	c5.innerHTML = att.to;
+	c6.innerHTML = dat[0];
 	return (row);
 }
 
@@ -76,14 +76,14 @@ function addSel(att) {
 	var c5 = row.insertCell(5);
 	var c6 = row.insertCell(6);
 	var c7 = row.insertCell(7);
-	c0.innerHTML = "<input type='checkbox' name='selCheck' />";
-	c1.innerHTML = att.filename;
-	c2.innerHTML = file[1];
-	c3.innerHTML = changeSize(att.size);
-	c4.innerHTML = att.subject;
-	c5.innerHTML = att.from;
-	c6.innerHTML = att.to;
-	c7.innerHTML = dat[0];
+	c0.innerHTML = "<input type='checkbox' name='attCheck' />";
+	c2.innerHTML = att.filename;
+	c1.innerHTML = file[1];
+	c7.innerHTML = changeSize(att.size);
+	c3.innerHTML = att.subject;
+	c4.innerHTML = att.from;
+	c5.innerHTML = att.to;
+	c6.innerHTML = dat[0];
 }
 
 //分页
@@ -289,7 +289,7 @@ function submitModal() {
 	loading.setAttribute("class", "KA Kj-JD picker-dialog");
 	loading.setAttribute("id", "loadingModal");
 	loading.setAttribute("role", "dialog");
-	loading.setAttribute("style", "margin:0px auto; width:200px; height:22px;overflow:auto; left:450px; top:0px; background: #fff1a8; border-color: #f9edbe; overflow:auto; font-size:20px;");
+	loading.setAttribute("style", "margin:0px auto; width:180px; height:22px;overflow:auto; left:450px; top:0px; background: #fff1a8; border-color: #f9edbe; overflow:auto; font-size:20px;");
 	loading.innerHTML="创建邮件...";
 	body.appendChild(loading);
 	chrome.extension.sendMessage({
@@ -388,13 +388,13 @@ function addModal(parent) {
 		install += "<div class='input-append'><input id='keyword' type='text' value='要搜索的附件...' class='span10'>";
 		install += "<button id = 'search'  class='btn btn-primary btn-middle btn-danger'>搜索</button></form></div></div>";
 		install += "<div class='container-fluid' id='exArea'><div id='ex'><table class='table table-hover table-bordered'pa_ui_name='table,exinput' pa_ui_hover='true'pa_ui_selectable='true' pa_ui_select_mode='multi'pa_ui_select_trigger='tr' pa_ui_select_column='0'pa_ui_select_triggerelement=':checkbox' id='attTable'><caption><h3 id='attTitle'>附件列表</h3></caption>";
-		install += "<thead><tr><th style='width:36px;'>选择</th><th>附件名</th><th style='width:72px;'>附件类型</th><th style='width:72px;'>附件大小</th><th style='width:144px;'>主题</th><th>发件人</th><th>收件人</th><th>日期</th></tr></thead><tbody></tbody></table>";
+		install += "<thead><tr><th style='width:36px;'>选择</th><th style='width:72px;'>附件类型</th><th>附件名</th><th style='width:144px;'>主题</th><th>发件人</th><th>收件人</th><th>日期</th><th style='width:72px;'>附件大小</th></tr></thead><tbody></tbody></table>";
 		install += "<div class='pagination'style='margin: auto; width: 480px; text-align: center;'><ul id='changePage'><li><a href='#' style='color: white; background-color: #ee5f5b;' id='prevPage'>";
 		install += "Prev</a></li><li><a href='#' style='color: blue;' id='nowPage'>1</a></li><li><a href='#' style='color: white; background-color: #ee5f5b;' id='nextPage'>Next</a></li></ul><ul id='searchPage' style='display:none;'><li><a href='#' style='color: white; background-color: #ee5f5b;' id='searchPrevPage'>";
 		install += "Prev</a></li><li><a href='#' style='color: blue;' id='searchNowPage'>1</a></li><li><a href='#' style='color: white; background-color: #ee5f5b;' id='searchNextPage'>Next</a></li></ul></div><div class='btn-group'style='margin: auto; text-align: right;'>";
 		install += "<button class='btn btn-primary btn-middle btn-danger' id='addSeclet'>添加选中附件</button></div></div></div></div>";
 		install += "<div class='modal-footer'><div><div><table class='table table-hover table-bordered'pa_ui_name='table,exinput' pa_ui_hover='true'pa_ui_selectable='true' pa_ui_select_mode='multi'pa_ui_select_trigger='tr' pa_ui_select_column='0'pa_ui_select_triggerelement=':checkbox' id='selectTable'><caption><h3 id='selTitle'>选中附件列表(0)</h3>";
-		install += "</caption><thead><tr><th style='width:36px; '>选择</th><th>附件名</th><th style='width:72px;'>附件类型</th><th style='width:72px;'>附件大小</th><th style='width:144px;'>主题</th><th>发件人</th><th>收件人</th><th>日期</th></tr></thead><tbody></tbody></table>";
+		install += "</caption><thead><tr><th style='width:36px;'>选择</th><th style='width:72px;'>附件类型</th><th>附件名</th><th style='width:144px;'>主题</th><th>发件人</th><th>收件人</th><th>日期</th><th style='width:72px;'>附件大小</th></tr></thead><tbody></tbody></table>";
 		install += "<div class='btn-group'style='margin: auto; text-align: right;'><button class='btn btn-primary btn-middle btn-danger' id='deleteSelect'>删除选中附件</button><button class='btn btn-primary btn-middle btn-danger' id='submitModal'>创建草稿</button><button class='btn btn-primary btn-middle btn-danger' id='download'>下载选中附件</button></div></div></div></div></div></div>";
 
 		//alert(install);
