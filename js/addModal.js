@@ -37,6 +37,8 @@ function addAtt(att) {
 	var searchTable = document.getElementById('attTable');
 	var file = new Array();
 	file = att.filename.split('.');
+	dat = att.date.split('+');
+	dat = dat[0].split('-');
 	var row = searchTable.insertRow();
 	var c0 = row.insertCell(0);
 	var c1 = row.insertCell(1);
@@ -47,13 +49,13 @@ function addAtt(att) {
 	var c6 = row.insertCell(6);
 	var c7 = row.insertCell(7);
 	c0.innerHTML = "<input type='checkbox' name='attCheck' />";
-	c1.innerHTML = file[0];
+	c1.innerHTML = att.filename;
 	c2.innerHTML = file[1];
 	c3.innerHTML = changeSize(att.size);
 	c4.innerHTML = att.subject;
 	c5.innerHTML = att.from;
 	c6.innerHTML = att.to;
-	c7.innerHTML = att.date;
+	c7.innerHTML = dat[0];
 	return (row);
 }
 
@@ -61,6 +63,8 @@ function addSel(att) {
 	var searchTable = document.getElementById('selectTable');
 	var file = new Array();
 	file = att.filename.split('.');
+	dat = att.date.split('+');
+	dat = dat[0].split('-');
 	var row = searchTable.insertRow();
 	var c0 = row.insertCell(0);
 	var c1 = row.insertCell(1);
@@ -71,13 +75,13 @@ function addSel(att) {
 	var c6 = row.insertCell(6);
 	var c7 = row.insertCell(7);
 	c0.innerHTML = "<input type='checkbox' name='selCheck' />";
-	c1.innerHTML = file[0];
+	c1.innerHTML = att.filename;
 	c2.innerHTML = file[1];
 	c3.innerHTML = changeSize(att.size);
 	c4.innerHTML = att.subject;
 	c5.innerHTML = att.from;
 	c6.innerHTML = att.to;
-	c7.innerHTML = att.date;
+	c7.innerHTML = dat[0];
 }
 
 //分页
@@ -230,12 +234,12 @@ function submitModal() {
 	loading.setAttribute("style", "margin:0px auto; width:120px; height:20px;overflow:auto; left:450px; top:80px; background: #fff1a8; border:1px solid #ccc; overflow:auto");
 	loading.innerHTML="Loading...";
 	body.appendChild(loading);
-	body.removeChild(document.getElementById("loading")); //不知为什么删不掉loading框QAQ
 	chrome.extension.sendMessage({
 		cmd: "draft",
 		attachs: selected
 	}, function(response) {
 		alert(response);
+		body.removeChild(document.getElementById("loading")); //不知为什么删不掉loading框QAQ
 	});
 	selected.splice(0, selected.length);
 	selIndex.splice(0, selIndex.length);
