@@ -104,6 +104,8 @@ function page() {
 		row.style.display = searchTable.style.display;
 	}
 	document.getElementById("nowPage").innerHTML = pageNum + 1;
+	var attTitle = document.getElementById("attTitle");
+	attTitle.innerHTML = attTitle.innerHTML.split('(')[0] + "(" + attach.length + ")";
 }
 
 function desPage() {
@@ -167,6 +169,8 @@ function addSeclet() {
 	if (flag <= 0) {
 		//alert("请选定要添加的附件！");
 	}
+	var selTitle = document.getElementById("selTitle");
+	selTitle.innerHTML = selTitle.innerHTML.split('(')[0] + "(" + selected.length + ")";
 }
 
 function deleteSelect() {
@@ -190,6 +194,8 @@ function deleteSelect() {
 	if (flag <= 0) {
 		//alert("请选定要删除的附件！");
 	}
+	var selTitle = document.getElementById("selTitle");
+	selTitle.innerHTML = selTitle.innerHTML.split('(')[0] + "(" + selected.length + ")";
 }
 
 //搜索分页
@@ -241,14 +247,10 @@ function searchIncPage() {
 }
 
 function search() {
-	
 	var row;
-	
 	var changePage = document.getElementById("changePage");
 	var searchPage = document.getElementById("searchPage");
-	
 	var keyword = document.querySelector('#keyword').value;
-
 	var at = document.getElementById("attTable")
 	var rowNum = at.rows.length
 	for (var i = rowNum - 2; i >= 0; i--) {
@@ -269,6 +271,8 @@ function search() {
 		searchPage.style.display = "";
 		searchPageNum = 0;
 		doSearchPage();
+		var attTitle = document.getElementById("attTitle");
+		attTitle.innerHTML = attTitle.innerHTML.split('(')[0] + "(" + searchIndex.length + ")";
 	}else{
 		pageNum = 0;
 		page();
@@ -276,7 +280,6 @@ function search() {
 		searchPage.style.display = "none";
 	}
 }
-
 
 //添加附件
 function submitModal() {
@@ -313,7 +316,7 @@ function download() {
 
 function showKey() {
 	var keyword = document.getElementById('keyword');
-	if(keyword.value == '要搜索的附件...' && keyFlag == 1)
+	if(keyFlag == 1)
 		keyword.value = '';
 }
 
@@ -384,13 +387,13 @@ function addModal(parent) {
 		install += "<div><div class='span10'><form class='form-search'>";
 		install += "<div class='input-append'><input id='keyword' type='text' value='要搜索的附件...' class='span10'>";
 		install += "<button id = 'search'  class='btn btn-primary btn-middle btn-danger'>搜索</button></form></div></div>";
-		install += "<div class='container-fluid' id='exArea'><div id='ex'><table class='table table-hover table-bordered'pa_ui_name='table,exinput' pa_ui_hover='true'pa_ui_selectable='true' pa_ui_select_mode='multi'pa_ui_select_trigger='tr' pa_ui_select_column='0'pa_ui_select_triggerelement=':checkbox' id='attTable'><caption><h3>附件列表</h3></caption>";
+		install += "<div class='container-fluid' id='exArea'><div id='ex'><table class='table table-hover table-bordered'pa_ui_name='table,exinput' pa_ui_hover='true'pa_ui_selectable='true' pa_ui_select_mode='multi'pa_ui_select_trigger='tr' pa_ui_select_column='0'pa_ui_select_triggerelement=':checkbox' id='attTable'><caption><h3 id='attTitle'>附件列表</h3></caption>";
 		install += "<thead><tr><th style='width:36px;'>选择</th><th>附件名</th><th style='width:72px;'>附件类型</th><th style='width:72px;'>附件大小</th><th style='width:144px;'>主题</th><th>发件人</th><th>收件人</th><th>日期</th></tr></thead><tbody></tbody></table>";
 		install += "<div class='pagination'style='margin: auto; width: 480px; text-align: center;'><ul id='changePage'><li><a href='#' style='color: white; background-color: #ee5f5b;' id='prevPage'>";
 		install += "Prev</a></li><li><a href='#' style='color: blue;' id='nowPage'>1</a></li><li><a href='#' style='color: white; background-color: #ee5f5b;' id='nextPage'>Next</a></li></ul><ul id='searchPage' style='display:none;'><li><a href='#' style='color: white; background-color: #ee5f5b;' id='searchPrevPage'>";
 		install += "Prev</a></li><li><a href='#' style='color: blue;' id='searchNowPage'>1</a></li><li><a href='#' style='color: white; background-color: #ee5f5b;' id='searchNextPage'>Next</a></li></ul></div><div class='btn-group'style='margin: auto; text-align: right;'>";
 		install += "<button class='btn btn-primary btn-middle btn-danger' id='addSeclet'>添加选中附件</button></div></div></div></div>";
-		install += "<div class='modal-footer'><div><div><table class='table table-hover table-bordered'pa_ui_name='table,exinput' pa_ui_hover='true'pa_ui_selectable='true' pa_ui_select_mode='multi'pa_ui_select_trigger='tr' pa_ui_select_column='0'pa_ui_select_triggerelement=':checkbox' id='selectTable'><caption><h3>选中附件列表</h3>";
+		install += "<div class='modal-footer'><div><div><table class='table table-hover table-bordered'pa_ui_name='table,exinput' pa_ui_hover='true'pa_ui_selectable='true' pa_ui_select_mode='multi'pa_ui_select_trigger='tr' pa_ui_select_column='0'pa_ui_select_triggerelement=':checkbox' id='selectTable'><caption><h3 id='selTitle'>选中附件列表(0)</h3>";
 		install += "</caption><thead><tr><th style='width:36px; '>选择</th><th>附件名</th><th style='width:72px;'>附件类型</th><th style='width:72px;'>附件大小</th><th style='width:144px;'>主题</th><th>发件人</th><th>收件人</th><th>日期</th></tr></thead><tbody></tbody></table>";
 		install += "<div class='btn-group'style='margin: auto; text-align: right;'><button class='btn btn-primary btn-middle btn-danger' id='deleteSelect'>删除选中附件</button><button class='btn btn-primary btn-middle btn-danger' id='submitModal'>创建草稿</button><button class='btn btn-primary btn-middle btn-danger' id='download'>下载选中附件</button></div></div></div></div></div></div>";
 
