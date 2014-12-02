@@ -283,6 +283,9 @@ function search() {
 
 //添加附件
 function submitModal() {
+	if(selected.length == 0){
+		return ;
+	}
 	body.removeChild(document.getElementById("divBack"));
 	body.removeChild(document.getElementById("divmodal"));
 	var loading = document.createElement("div");
@@ -297,7 +300,7 @@ function submitModal() {
 		attachs: selected
 	}, function(response) {
 		loading.innerHTML="创建成功...";
-		setTimeout(function(){body.removeChild(document.getElementById("loadingModal"));}, 1000);
+		setTimeout(function(){body.removeChild(document.getElementById("loadingModal"));}, 5000);
 	});
 	selected.splice(0, selected.length);
 	selIndex.splice(0, selIndex.length);
