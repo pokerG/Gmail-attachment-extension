@@ -10,6 +10,7 @@ function getAttach() {
 		cmd: "get",
 	}, function(response) {
 		msgs = response;
+		attach.length = 0;
 		console.log("success");
 		for (var i = 0; i < response.length; i++) {
 			console.log(response[i]);
