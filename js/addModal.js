@@ -26,6 +26,18 @@ Array.prototype.contain = function(val) {
 	}
 };
 
+function scrollTop() {
+	var frame = document.getElementById('divmodal');
+	frame.scrollTop = 0;
+	//alert("top");
+}
+
+function scrollBottom() {
+	var frame = document.getElementById('divmodal');
+	frame.scrollTop = frame.scrollHeight;
+	//alert("donw");
+}
+
 function changeSize(size) {
 	if (size < Math.pow(1024, 2))
 		return ((size / 1024).toFixed(2) + "KB");
@@ -106,6 +118,7 @@ function page() {
 	document.getElementById("nowPage").innerHTML = pageNum + 1;
 	var attTitle = document.getElementById("attTitle");
 	attTitle.innerHTML = attTitle.innerHTML.split('(')[0] + "(" + attach.length + ")";
+	scrollTop();
 }
 
 function desPage() {
@@ -171,6 +184,7 @@ function addSeclet() {
 	}
 	var selTitle = document.getElementById("selTitle");
 	selTitle.innerHTML = selTitle.innerHTML.split('(')[0] + "(" + selected.length + ")";
+	scrollBottom();
 }
 
 function deleteSelect() {
@@ -217,6 +231,7 @@ function doSearchPage() {
 		row.style.display = searchTable.style.display;
 	}
 	document.getElementById("searchNowPage").innerHTML = searchPageNum + 1;
+	scrollTop();
 }
 
 function searchDesPage() {
