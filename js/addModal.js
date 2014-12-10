@@ -76,7 +76,7 @@ function addSel(att) {
 	var c5 = row.insertCell(5);
 	var c6 = row.insertCell(6);
 	var c7 = row.insertCell(7);
-	c0.innerHTML = "<input type='checkbox' name='attCheck' />";
+	c0.innerHTML = "<input type='checkbox' name='selCheck' />";
 	c2.innerHTML = att.filename;
 	c1.innerHTML = file[1];
 	c7.innerHTML = changeSize(att.size);
