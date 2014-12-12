@@ -12,6 +12,7 @@ var searchPageNum = 0;
 var keyFlag = 1;
 var sort = new Array();
 var sortFlag = true;
+var searchFlag = false;
 
 Array.prototype.indexOf = function(val) {
 	for (var i = 0; i < this.length; i++) {
@@ -185,7 +186,7 @@ function page() {
 	if (searchTable.rows.length - 1 < ed)
 		ed = searchTable.rows.length - 1;
 	for (i = st; i < ed; i++) {
-		row = document.getElementById("att" + i);
+		row = searchTable.rows[i + 1];//document.getElementById("att" + i);
 		row.style.display = searchTable.style.display;
 	}
 	document.getElementById("nowPage").innerHTML = pageNum + 1;
@@ -222,6 +223,7 @@ function incPage() {
 }
 
 function showAtt() {
+	searchFlag = false;
 	//alert("add");
 	var inf;
 	if (document.getElementById("attTable").rows.length > 1)
@@ -301,12 +303,12 @@ function doSearchPage() {
 	if (sNum < ed)
 		ed = sNum;
 	//alert(st + " " + ed);
+	document.getElementById("searchNowPage").innerHTML = searchPageNum + 1;
+	scrollTop();
 	for (i = st; i < ed; i++) {
 		row = document.getElementById("att" + searchIndex[i]);
 		row.style.display = searchTable.style.display;
 	}
-	document.getElementById("searchNowPage").innerHTML = searchPageNum + 1;
-	scrollTop();
 }
 
 function searchDesPage() {
@@ -337,14 +339,16 @@ function searchIncPage() {
 }
 
 function search() {
+	searchFlag = true;
 	var row;
 	var changePage = document.getElementById("changePage");
 	var searchPage = document.getElementById("searchPage");
 	var keyword = document.querySelector('#keyword').value;
 	var at = document.getElementById("attTable")
 	var rowNum = at.rows.length
-	for (var i = rowNum - 2; i >= 0; i--) {
-		row = document.getElementById("att" + i);
+	//alert(rowNum);
+	for (var i = 1; i < rowNum; i++) {
+		row = at.rows[i];
 		row.style.display = "none";
 	}
 	if (keyword != "要搜索的附件...") {
@@ -364,8 +368,12 @@ function search() {
 		var attTitle = document.getElementById("attTitle");
 		attTitle.innerHTML = attTitle.innerHTML.split('(')[0] + "(" + searchIndex.length + ")";
 	}else{
+		//alert("!");
 		pageNum = 0;
 		page();
+		var attTitle = document.getElementById("attTitle");
+		attTitle.innerHTML = attTitle.innerHTML.split('(')[0] + "(" + attach.length + ")";
+		searchFlag = false;
 		changePage.style.display = "";
 		searchPage.style.display = "none";
 	}
@@ -422,24 +430,47 @@ function disKey() {
 		keyFlag = 0;
 }
 
-//排序显示（未完成）
+//排序显示
 function reshow() {
 	var searchTable = document.getElementById('attTable');
-	var sortCell = new Array();
-	var i;
-	for (i = 0; i < sort.length; i++) {
-		var sortNode = document.getElementById('att' + sort[i].index);
-		sortCell.push(sortNode);
+	var i,row,ch;
+	var checkedIndex = new Array();
+	for (i = searchTable.rows.length - 1; i > 0; i--) {
+		//alert(i + " " + searchTable.rows[i].cells[2].innerHTML);
+		ch = searchTable.rows[i];
+		if (ch.cells[0].children[0].checked) {
+			checkedIndex.push(parseInt(ch.id.split('tt')[1]))
+		}
+		searchTable.deleteRow(i);
 	}
-	if (sortFlag)
-		for (i = 0; i < sort.length; i++)
-			searchTable.rows[i + 1] = sortCell[i];
-	else
-		for (i = 0; i < sort.length; i++)
-			searchTable.rows[sort.length - i + 1] = sortCell[i];
-	//page();
+	if (sortFlag) {
+		for (i = 0; i < sort.length; i++) {
+			row = addAtt(attach[sort[i].index]);
+			row.id = "att" + sort[i].index;
+		}
+	}
+	else {
+		for (i = sort.length - 1; i >= 0; i--) {
+			row = addAtt(attach[sort[i].index]);
+			row.id = "att" + sort[i].index;
+		}
+	}
+	//alert(checkedIndex);
+	for (i = 0; i < checkedIndex.length; i++) {
+		//alert(checkedIndex[i]);
+		ch = document.getElementById('att' + checkedIndex[i]);
+		ch.cells[0].children[0].checked = true;
+	}
+	if (!searchFlag) {
+		//alert("show");
+		pageNum = 0;
+		page();
+	} else {
+		//alert("search");
+		searchPageNum = 0;
+		doSearchPage();
+	}
 	//alert(sortCell.length + "!");
-	//未完成
 	sortFlag = !sortFlag;
 	//alert(sortFlag);
 }
@@ -455,11 +486,11 @@ function bubbleSort() {
 				sort[i] = sort[j];
 				sort[j] = temp;
 			}
-	reshow();
-	string = '';
+	/*var string = '';
 	for (i = 0; i < sort.length; i++)
 		string += sort[i].index + ' ' + sort[i].key + '\n';
-	alert(string);
+	alert(string);*/
+	reshow();
 }
 
 function doSort(sortKey) {
@@ -483,42 +514,42 @@ function doSort(sortKey) {
 }
 
 function choseSort() {
-	alert("chose");
+	//alert("chose");
 	doSort(0);
 }
 
 function typeSort() {
-	alert("type");
+	//alert("type");
 	doSort(1);
 }
 
 function nameSort() {
-	alert("name");
+	//alert("name");
 	doSort(2);
 }
 
 function subjectSort() {
-	alert("subject");
+	//alert("subject");
 	doSort(3);
 }
 
 function fromSort() {
-	alert("from");
+	//alert("from");
 	doSort(4);
 }
 
 function toSort() {
-	alert("to");
+	//alert("to");
 	doSort(5);
 }
 
 function dateSort() {
-	alert("date");
+	//alert("date");
 	doSort(6);
 }
 
 function sizeSort() {
-	alert("size");
+	//alert("size");
 	doSort(7);
 }
 
@@ -611,7 +642,6 @@ function addModal(parent) {
 		document.getElementById("_to").addEventListener("click", toSort, false);
 		document.getElementById("_date").addEventListener("click", dateSort, false);
 		document.getElementById("_size").addEventListener("click", sizeSort, false);
-		
 
 	}
 }
