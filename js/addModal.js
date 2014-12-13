@@ -122,6 +122,56 @@ function changeDate(date) {
 	return(newDate);
 }
 
+function checkAll() {
+	var searchTable = document.getElementById('attTable');
+	var i,vis,che,row;
+	vis = 0;
+	che = 0;
+	for (i = 1; i < searchTable.rows.length; i++) {
+		row = searchTable.rows[i];
+		if (row.style.display != 'none') {
+			vis++;
+			if (row.cells[0].children[0].checked)
+			che++;
+		}
+	}
+	//alert(vis + " " + che);
+	var selBut = document.getElementById('secletAll');
+	if (vis != che) {
+		selectAllFlag = false;
+		selBut.innerHTML = "全选";
+	}
+	else {
+		selectAllFlag = true;
+		selBut.innerHTML = "取消全选";
+	}
+}
+
+function checkAllSel() {
+	var selectTable = document.getElementById('selectTable');
+	var i,vis,che,row;
+	vis = 0;
+	che = 0;
+	for (i = 1; i < selectTable.rows.length; i++) {
+		row = selectTable.rows[i];
+		if (row.style.display != 'none') {
+			vis++;
+			if (row.cells[0].children[0].checked)
+			che++;
+		}
+	}
+	//alert(vis + " " + che);
+	var selBut = document.getElementById('selectAllSel');
+	if (vis != che) {
+		selAllFlag = false;
+		selBut.innerHTML = "全选";
+	}
+	else {
+		selAllFlag = true;
+		selBut.innerHTML = "取消全选";
+	}
+}
+
 function addAtt(att) {
 	var searchTable = document.getElementById('attTable');
 	var file = new Array();
@@ -137,7 +187,8 @@ function addAtt(att) {
 	var c5 = row.insertCell(5);
 	var c6 = row.insertCell(6);
 	var c7 = row.insertCell(7);
-	c0.innerHTML = "<input type='checkbox' name='attCheck' />";
+	c0.innerHTML = "<input type='checkbox' name='attCheck'/>";
+	c0.children[0].addEventListener("change", checkAll, false);
 	c2.innerHTML = att.filename;
 	c1.innerHTML = file[1];
 	c7.innerHTML = changeSize(att.size);
@@ -170,7 +221,8 @@ function addSel(att) {
 	var c5 = row.insertCell(5);
 	var c6 = row.insertCell(6);
 	var c7 = row.insertCell(7);
-	c0.innerHTML = "<input type='checkbox' name='selCheck' />";
+	c0.innerHTML = "<input type='checkbox' name='selCheck'/>";
+	c0.children[0].addEventListener("change", checkAllSel, false);
 	c2.innerHTML = att.filename;
 	c1.innerHTML = file[1];
 	c7.innerHTML = changeSize(att.size);
