@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Gmail Attachment Management",
-    "version": "1.0",
+    "version": "1.1",
     "description": "管理你的gmail附件",
 
     // "page_action": {  //Oauth认证
