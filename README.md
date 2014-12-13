@@ -32,4 +32,4 @@ You can easy create a draft with these attacments using this button():
 
 ##Feedback
 
-[Open an issue](https://github.com/pokerG/Gmail-attachment-extension/issues/new)
+[Open an issue](https://github.com/pokerG/Gmail-attachment-extension/issues/new) Please add the label "feedback"
