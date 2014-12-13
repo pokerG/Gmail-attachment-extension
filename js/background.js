@@ -117,23 +117,27 @@ function getMessage(MessageId) {
           for (var i = 0; i < parts.length; i++) {
             var part = parts[i];
             if (part.body.attachmentId != null && part.filename != "") {
-              msgs[msgs.length] = {
-                msgId: messageObj.id,
-                filename: part.filename,
-                partId: part.partId,
-                mimeType: part.mimeType,
-                attachmentId: part.body.attachmentId,
-                subject: findheader(messageObj.payload.headers,"Subject"),
-                from: findheader(messageObj.payload.headers,"From"),
-                to: findheader(messageObj.payload.headers,"To"),
-                date: findheader(messageObj.payload.headers,"Date"),
-                size: part.body.size
+              for (var j = 0; j < part.headers.length; j++) {
+                if (part.headers[j].value.split(";")[0] == "attachment") {  //filter inline picture
+                  msgs[msgs.length] = {
+                    msgId: messageObj.id,
+                    filename: part.filename,
+                    partId: part.partId,
+                    mimeType: part.mimeType,
+                    attachmentId: part.body.attachmentId,
+                    subject: findheader(messageObj.payload.headers, "Subject"),
+                    from: findheader(messageObj.payload.headers, "From"),
+                    to: findheader(messageObj.payload.headers, "To"),
+                    date: findheader(messageObj.payload.headers, "Date"),
+                    size: part.body.size
+                  }
+                  chrome.storage.local.set(msgs[msgs.length - 1], function(items) {
+                    console.log(items);
+                  });
+                  // getAttachment(messageObj.id, part.body.attachmentId);
+                  console.log(messageObj);
+                }
               }
-              chrome.storage.local.set(msgs[msgs.length - 1], function(items) {
-                console.log(items);
-              });
-              // getAttachment(messageObj.id, part.body.attachmentId);
-              console.log(messageObj);
             }
           }
         }
@@ -219,9 +223,9 @@ function setData(attachs) {
   return data;
 }
 
-function findheader(headers,name){
-  for(var i = 0; i < headers.length;i++){
-    if(headers[i].name == name){
+function findheader(headers, name) {
+  for (var i = 0; i < headers.length; i++) {
+    if (headers[i].name == name) {
       return headers[i].value;
     }
   }

@@ -24,7 +24,7 @@ You can easy create a draft with these attacments using this button():
 
 ##Installation
 
-1. Click [here](https://github.com/pokerG/Gmail-attachment-extension/releases) and download the latest version.
+1. Go to [Releases](https://github.com/pokerG/Gmail-attachment-extension/releases) and download the latest version.
 2. Unzip the folder wherever you'd like.
 3. Go to Chrome extensions page (`chrome://extensions/`) and load the folder as an **Unpacked extension**.
 
