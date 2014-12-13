@@ -263,6 +263,7 @@ function secletAll() {
 				else
 					row.cells[0].children[0].checked = false;
 	}
+	//alert(count);
 	if (selBut.innerHTML == "全选")
 		selBut.innerHTML = "取消全选";
 	else
@@ -285,7 +286,7 @@ function addSeclet() {
 	for (i = 0; i < ch.length; i++) {
 		var tr = ch[i].parentNode.parentNode;
 		var index = parseInt(tr.id.split('tt')[1]);
-		if (ch[i].checked == true) {
+		if (ch[i].checked == true && tr.style.display == selectTable.style.display) {
 			if (selIndex.contain(index) == -1) {
 				var row = addSel(attach[index]);
 				row.id = "sel" + index;
@@ -296,6 +297,7 @@ function addSeclet() {
 			ch[i].checked = false;
 		}
 	}
+	//alert(flag);
 	if (flag <= 0) {
 		//alert("请选定要添加的附件！");
 	}
@@ -528,12 +530,6 @@ function reshow() {
 			row.id = "att" + sort[i].index;
 		}
 	}
-	//alert(checkedIndex);
-	for (i = 0; i < checkedIndex.length; i++) {
-		//alert(checkedIndex[i]);
-		ch = document.getElementById('att' + checkedIndex[i]);
-		ch.cells[0].children[0].checked = true;
-	}
 	if (!searchFlag) {
 		//alert("show");
 		pageNum = 0;
@@ -546,6 +542,12 @@ function reshow() {
 	//alert(sortCell.length + "!");
 	sortFlag = !sortFlag;
 	//alert(sortFlag);
+	//alert(checkedIndex);
+	for (i = 0; i < checkedIndex.length; i++) {
+		//alert(checkedIndex[i]);
+		ch = document.getElementById('att' + checkedIndex[i]);
+		ch.cells[0].children[0].checked = true;
+	}
 }
 
 function bubbleSort() {
