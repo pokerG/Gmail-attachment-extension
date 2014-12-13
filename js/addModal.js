@@ -141,7 +141,14 @@ function addAtt(att) {
 	c7.innerHTML = changeSize(att.size);
 	c3.innerHTML = att.subject;
 	c4.innerHTML = att.from;
-	c5.innerHTML = att.to;
+	tos = att.to.split(",");
+	if(tos.length > 3){
+		c5.innerHTML = tos[0] + "," + tos[1] + "," + tos[2] + "...";
+	}else{
+		c5.innerHTML = att.to;
+	}
+	
+	
 	c6.innerHTML = changeDate(dat[0]);
 	return (row);
 }
