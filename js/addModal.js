@@ -13,6 +13,8 @@ var keyFlag = 1;
 var sort = new Array();
 var sortFlag = true;
 var searchFlag = false;
+var selectAllFlag = false;
+var selAllFlag = false;
 
 Array.prototype.indexOf = function(val) {
 	for (var i = 0; i < this.length; i++) {
@@ -174,11 +176,15 @@ function addSel(att) {
 
 //分页
 function page() {
+	selectAllFlag = false;
+	var selBut = document.getElementById('secletAll');
+	selBut.innerHTML = "全选";
 	var searchTable = document.getElementById('attTable');
 	var pageLen, st, ed, row, i;
 	for (i = 1; i < searchTable.rows.length; i++) {
 		row = searchTable.rows[i];
 		row.style.display = "none";
+		row.cells[0].children[0].checked = false;
 	}
 	st = pageNum * pageAttNum;
 	ed = st + pageAttNum;
@@ -236,7 +242,36 @@ function showAtt() {
 	page();
 }
 
+function secletAll() {
+	var i,row,count;
+	var searchTable = document.getElementById('attTable');
+	var selBut = document.getElementById('secletAll');
+	count = 0;
+	for (i = 1; i < searchTable.rows.length; i++) {
+			row = searchTable.rows[i];
+			if (row.style.display == searchTable.style.display)
+				count++;
+				if (!selectAllFlag) 
+					row.cells[0].children[0].checked = true;
+				else
+					row.cells[0].children[0].checked = false;
+	}
+	if (selBut.innerHTML == "全选")
+		selBut.innerHTML = "取消全选";
+	else
+		selBut.innerHTML = "全选";
+	selectAllFlag = !selectAllFlag;
+	//空表情况
+	if (count == 0) {
+		selBut.innerHTML = "全选";
+		selectAllFlag = false;
+	}
+}
+
 function addSeclet() {
+	selectAllFlag = false;
+	var selBut = document.getElementById('secletAll');
+	selBut.innerHTML = "全选";
 	var flag = 0;
 	var selectTable = document.getElementById('selectTable');
 	var ch = document.getElementsByName('attCheck');
@@ -260,6 +295,28 @@ function addSeclet() {
 	var selTitle = document.getElementById("selTitle");
 	selTitle.innerHTML = selTitle.innerHTML.split('(')[0] + "(" + selected.length + ")";
 	scrollBottom();
+}
+
+function selectAllSel() {
+	var i,row;
+	var selTable = document.getElementById('selectTable');
+	var selBut = document.getElementById('selectAllSel');
+	//空表情况
+	if (selTable.rows.length == 1)
+		return;
+	for (i = 1; i < selTable.rows.length; i++) {
+			row = selTable.rows[i];
+			if (row.style.display == selTable.style.display)
+				if (!selAllFlag) 
+					row.cells[0].children[0].checked = true;
+				else
+					row.cells[0].children[0].checked = false;
+	}
+	if (selBut.innerHTML == "全选")
+		selBut.innerHTML = "取消全选";
+	else
+		selBut.innerHTML = "全选";
+	selAllFlag = !selAllFlag;
 }
 
 function deleteSelect() {
@@ -287,15 +344,24 @@ function deleteSelect() {
 	}
 	var selTitle = document.getElementById("selTitle");
 	selTitle.innerHTML = selTitle.innerHTML.split('(')[0] + "(" + selected.length + ")";
+	if (selectTable.rows.length == 1){
+		var selBut = document.getElementById('selectAllSel');
+		selBut.innerHTML = "全选";
+		selAllFlag = false;
+	}
 }
 
 //搜索分页
 function doSearchPage() {
+	selectAllFlag = false;
+	var selBut = document.getElementById('secletAll');
+	selBut.innerHTML = "全选";
 	var searchTable = document.getElementById('attTable');
 	var pageLen, st, ed, row, i;
 	for (i = 1; i < searchTable.rows.length; i++) {
 		row = searchTable.rows[i];
 		row.style.display = "none";
+		row.cells[0].children[0].checked = false;
 	}
 	var sNum = searchIndex.length;
 	st = searchPageNum * pageAttNum;
@@ -616,15 +682,17 @@ function addModal(parent) {
 		install += "<div class='pagination'style='margin: auto; width: 480px; text-align: center;'><ul id='changePage'><li><a href='#' style='color: white; background-color: #ee5f5b;' id='prevPage'>";
 		install += "Prev</a></li><li><a href='#' style='color: blue;' id='nowPage'>1</a></li><li><a href='#' style='color: white; background-color: #ee5f5b;' id='nextPage'>Next</a></li></ul><ul id='searchPage' style='display:none;'><li><a href='#' style='color: white; background-color: #ee5f5b;' id='searchPrevPage'>";
 		install += "Prev</a></li><li><a href='#' style='color: blue;' id='searchNowPage'>1</a></li><li><a href='#' style='color: white; background-color: #ee5f5b;' id='searchNextPage'>Next</a></li></ul></div><div class='btn-group'style='margin: auto; text-align: right;'>";
-		install += "<button class='btn btn-primary btn-middle btn-danger' id='addSeclet'>添加选中附件</button></div></div></div></div>";
+		install += "<div class='btn-group'style='margin: auto; text-align: right;'><button class='btn btn-primary btn-middle btn-danger' id='secletAll'>全选</button><button class='btn btn-primary btn-middle btn-danger' id='addSeclet'>添加选中附件</button></div></div></div></div></div>";
 		install += "<div class='modal-footer'><div><div><table class='table table-hover table-bordered'pa_ui_name='table,exinput' pa_ui_hover='true'pa_ui_selectable='true' pa_ui_select_mode='multi'pa_ui_select_trigger='tr' pa_ui_select_column='0'pa_ui_select_triggerelement=':checkbox' id='selectTable'><caption><h3 id='selTitle'>选中附件列表(0)</h3>";
 		install += "</caption><thead><tr><th style='width:40px;'>选择</th><th style='width:72px;'>类型</th><th>附件名</th><th style='width:144px;'>主题</th><th>发件人</th><th>收件人</th><th style='width:144px;'>日期</th><th style='width:72px;'>大小</th></tr></thead><tbody></tbody></table>";
-		install += "<div class='btn-group'style='margin: auto; text-align: right;'><button class='btn btn-primary btn-middle btn-danger' id='deleteSelect'>删除选中附件</button><button class='btn btn-primary btn-middle btn-danger' id='submitModal'>创建草稿</button><button class='btn btn-primary btn-middle btn-danger' id='download'>下载选中附件</button></div></div></div></div></div></div>";
+		install += "<div class='btn-group'style='margin: auto; text-align: right;'><button class='btn btn-primary btn-middle btn-danger' id='selectAllSel'>全选</button><button class='btn btn-primary btn-middle btn-danger' id='deleteSelect'>删除选中附件</button><button class='btn btn-primary btn-middle btn-danger' id='submitModal'>创建草稿</button><button class='btn btn-primary btn-middle btn-danger' id='download'>下载选中附件</button></div></div></div></div></div></div>";
 
 		//alert(install);
 		$("div#divmodal").append(install);
 		document.getElementById("search").addEventListener("click", search, false);
+		document.getElementById("secletAll").addEventListener("click", secletAll, false);
 		document.getElementById("addSeclet").addEventListener("click", addSeclet, false);
+		document.getElementById("selectAllSel").addEventListener("click", selectAllSel, false);
 		document.getElementById("deleteSelect").addEventListener("click", deleteSelect, false);
 		document.getElementById("prevPage").addEventListener("click", desPage, false);
 		document.getElementById("nextPage").addEventListener("click", incPage, false);
