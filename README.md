@@ -28,8 +28,8 @@ You can easy create a draft with these attacments using this button():
 2. Unzip the folder wherever you'd like.
 3. Go to Chrome extensions page (`chrome://extensions/`) and load the folder as an **Unpacked extension**.
 
-*notice:*First use must be authorization.If occur to 401 error,please reload extension.
+*notice:* First use must be authorization.If occur to 401 error,please reload extension.
 
 ##Feedback
 
-[Open an issue](https://github.com/pokerG/Gmail-attachment-extension/issues/new)
+[Open an issue](https://github.com/pokerG/Gmail-attachment-extension/issues/new) Please add the label "feedback"
