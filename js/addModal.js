@@ -429,10 +429,11 @@ function doSearchPage() {
 	ed = st + pageAttNum;
 	if (sNum < ed)
 		ed = sNum;
-	//alert(st + " " + ed);
+	alert(st + " " + ed);
 	document.getElementById("searchNowPage").innerHTML = searchPageNum + 1;
 	scrollTop();
 	for (i = st; i < ed; i++) {
+		//alert(searchIndex[i]);
 		row = document.getElementById("att" + searchIndex[i]);
 		row.style.display = searchTable.style.display;
 	}
@@ -560,8 +561,9 @@ function disKey() {
 //排序显示
 function reshow() {
 	var searchTable = document.getElementById('attTable');
-	var i,row,ch;
+	var i,j,row,ch,temp;
 	var checkedIndex = new Array();
+	var order = new Array();
 	for (i = searchTable.rows.length - 1; i > 0; i--) {
 		//alert(i + " " + searchTable.rows[i].cells[2].innerHTML);
 		ch = searchTable.rows[i];
@@ -570,6 +572,8 @@ function reshow() {
 		}
 		searchTable.deleteRow(i);
 	}
+	for (i = 0; i < sort.length; i++) 
+			order.push(sort[i].index);
 	if (sortFlag) {
 		for (i = 0; i < sort.length; i++) {
 			row = addAtt(attach[sort[i].index]);
@@ -587,7 +591,16 @@ function reshow() {
 		pageNum = 0;
 		page();
 	} else {
-		//alert("search");
+		//alert(order);
+		//alert(searchIndex);
+		for (i = 0; i < searchIndex.length - 1; i++) 
+			for (j = i + 1; j < searchIndex.length; j++)
+				if (order.indexOf(searchIndex[i]) > order.indexOf(searchIndex[j]))	{
+					temp = searchIndex[i];
+					searchIndex[i] = searchIndex[j];
+					searchIndex[j] = temp;
+				}
+		//alert(searchIndex);
 		searchPageNum = 0;
 		doSearchPage();
 	}
