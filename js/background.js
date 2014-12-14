@@ -118,11 +118,13 @@ function getMessage(MessageId) {
             var part = parts[i];
             if (part.body.attachmentId != null && part.filename != "") {
                 if (findheader(part.headers,"Content-Disposition").split(";")[0] == "attachment") {  //filter inline picture
+                  file = part.filename.split('.');
                   msgs[msgs.length] = {
                     msgId: messageObj.id,
                     filename: part.filename,
                     partId: part.partId,
                     mimeType: part.mimeType,
+                    type: file.length > 1 ? file[file.length - 1] : "",
                     attachmentId: part.body.attachmentId,
                     subject: findheader(messageObj.payload.headers, "Subject"),
                     from: findheader(messageObj.payload.headers, "From"),
