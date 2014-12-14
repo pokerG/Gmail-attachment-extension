@@ -143,7 +143,7 @@ function checkAll() {
 	}
 	else {
 		selectAllFlag = true;
-		selBut.innerHTML = "取消全选";
+		selBut.innerHTML = "全不选";
 	}
 }
 
@@ -168,7 +168,7 @@ function checkAllSel() {
 	}
 	else {
 		selAllFlag = true;
-		selBut.innerHTML = "取消全选";
+		selBut.innerHTML = "全不选";
 	}
 }
 
@@ -194,14 +194,12 @@ function addAtt(att) {
 	c7.innerHTML = changeSize(att.size);
 	c3.innerHTML = att.subject;
 	c4.innerHTML = att.from;
-	tos = att.to.split(",");
+	tos = att.to.split(",");	//Too much info replaced with ...
 	if(tos.length > 3){
 		c5.innerHTML = tos[0] + "," + tos[1] + "," + tos[2] + "...";
 	}else{
 		c5.innerHTML = att.to;
 	}
-	
-	
 	c6.innerHTML = changeDate(dat[0]);
 	return (row);
 }
@@ -228,7 +226,12 @@ function addSel(att) {
 	c7.innerHTML = changeSize(att.size);
 	c3.innerHTML = att.subject;
 	c4.innerHTML = att.from;
-	c5.innerHTML = att.to;
+	tos = att.to.split(",");	//Too much info replaced with ...
+	if(tos.length > 3){
+		c5.innerHTML = tos[0] + "," + tos[1] + "," + tos[2] + "...";
+	}else{
+		c5.innerHTML = att.to;
+	}
 	c6.innerHTML = changeDate(dat[0]);
 	return (row);
 }
@@ -317,7 +320,7 @@ function secletAll() {
 	}
 	//alert(count);
 	if (selBut.innerHTML == "全选")
-		selBut.innerHTML = "取消全选";
+		selBut.innerHTML = "全不选";
 	else
 		selBut.innerHTML = "全选";
 	selectAllFlag = !selectAllFlag;
@@ -374,7 +377,7 @@ function selectAllSel() {
 					row.cells[0].children[0].checked = false;
 	}
 	if (selBut.innerHTML == "全选")
-		selBut.innerHTML = "取消全选";
+		selBut.innerHTML = "全不选";
 	else
 		selBut.innerHTML = "全选";
 	selAllFlag = !selAllFlag;
