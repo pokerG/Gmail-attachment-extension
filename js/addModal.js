@@ -190,7 +190,7 @@ function addAtt(att) {
 	c0.innerHTML = "<input type='checkbox' name='attCheck'/>";
 	c0.children[0].addEventListener("change", checkAll, false);
 	c2.innerHTML = att.filename;
-	c1.innerHTML = file[1];
+	c1.innerHTML = file.length > 1 ? file[file.length - 1] : "";
 	c7.innerHTML = changeSize(att.size);
 	c3.innerHTML = att.subject;
 	c4.innerHTML = att.from;
@@ -222,7 +222,7 @@ function addSel(att) {
 	c0.innerHTML = "<input type='checkbox' name='selCheck'/>";
 	c0.children[0].addEventListener("change", checkAllSel, false);
 	c2.innerHTML = att.filename;
-	c1.innerHTML = file[1];
+	c1.innerHTML = file.length > 1 ? file[file.length - 1] : "";
 	c7.innerHTML = changeSize(att.size);
 	c3.innerHTML = att.subject;
 	c4.innerHTML = att.from;
