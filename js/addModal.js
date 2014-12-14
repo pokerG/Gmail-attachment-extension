@@ -2,6 +2,7 @@
  * 添加添加附件的窗口
  * @return {[DOM Element]}        [插入的窗口]
  */
+<<<<<<< HEAD
 
 var selected = new Array(); //存储选中的附件
 var selIndex = new Array(); //存储选中的附件索引号
@@ -693,6 +694,8 @@ function sizeSort() {
 	doSort(7);
 }
 
+=======
+>>>>>>> 9fb084d20d6948151c929b78a5ccf77080f5acc4
 function addModal(parent) {
 	//alert('add'); 
 	body = parent.querySelector(".aAU");
