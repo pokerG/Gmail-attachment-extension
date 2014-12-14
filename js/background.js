@@ -56,7 +56,7 @@ var attchList = new Array();
 
 function fetchList(PageToken, q) {
   var LIST_FETCH_URL = 'https://www.googleapis.com/gmail/v1/users/me/messages';
-  LIST_FETCH_URL = LIST_FETCH_URL + "?q=" + q;
+  LIST_FETCH_URL = LIST_FETCH_URL + "?includeSpamTrash=true&q=" + q;
   // LIST_FETCH_URL = encodeURI(LIST_FETCH_URL);
   var xhr = new XMLHttpRequest();
   var nextPageToken = "";
@@ -117,8 +117,7 @@ function getMessage(MessageId) {
           for (var i = 0; i < parts.length; i++) {
             var part = parts[i];
             if (part.body.attachmentId != null && part.filename != "") {
-              for (var j = 0; j < part.headers.length; j++) {
-                if (part.headers[j].value.split(";")[0] == "attachment") {  //filter inline picture
+                if (findheader(part.headers,"Content-Disposition").split(";")[0] == "attachment") {  //filter inline picture
                   msgs[msgs.length] = {
                     msgId: messageObj.id,
                     filename: part.filename,
@@ -137,7 +136,6 @@ function getMessage(MessageId) {
                   // getAttachment(messageObj.id, part.body.attachmentId);
                   console.log(messageObj);
                 }
-              }
             }
           }
         }
