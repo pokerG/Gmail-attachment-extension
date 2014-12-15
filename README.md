@@ -14,13 +14,9 @@ Open your Gmail attachments list using this button in the mail view:
 
 ![list](http://gmail-attachment-extension.qiniudn.com/list.jpg)
 
-####Download file
+####Create Draft & Download file
 
-Download the attacments which you chosen quickly using this button():
-
-####Create Draft
-
-You can easy create a draft with these attacments using this button():
+You can easy create a draft with these attacments using the left button and download them quickly with the right one:
 
 ![button](http://gmail-attachment-extension.qiniudn.com/createdownload.jpg)
 
