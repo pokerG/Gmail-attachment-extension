@@ -1,6 +1,6 @@
-#Gmail邮件扩展
+#Gmail附件扩展
 
-这是一个让你使用Gmail中存在的附件来下载或者创建草稿的谷歌浏览器插件。
+这是一个让你使用存在于Gmail中的附件来下载或者创建草稿的chrome扩展。
 
 ##特色
 
@@ -24,7 +24,7 @@
 
 ##安装
 
-1. 点击文字[下载](https://github.com/pokerG/Gmail-attachment-extension/releases)前去下载最新的插件版本。
+1. 前去[Releases](https://github.com/pokerG/Gmail-attachment-extension/releases)页面下载最新的插件版本。
 2. 将下载的压缩包解压到任意地方。
 3. 在谷歌浏览器扩展程序页面(`chrome://extensions/`)选择开发者模式将文件夹作为正在开发的扩展程序加载。
 
@@ -32,6 +32,6 @@
 
 ##反馈
 
-开启一个[问题](https://github.com/pokerG/Gmail-attachment-extension/issues/new)来进行反馈。注意添加反馈标签。
+开启一个[issue](https://github.com/pokerG/Gmail-attachment-extension/issues/new)来进行反馈。注意添加"feedback"标签。
 
 
