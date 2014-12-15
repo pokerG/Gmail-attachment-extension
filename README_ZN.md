@@ -2,6 +2,8 @@
 
 这是一个让你使用存在于Gmail中的附件来下载或者创建草稿的chrome扩展。
 
+[English description](https://github.com/pokerG/Gmail-attachment-extension/blob/master/README.md)
+
 ##特色
 
 ####附件视图
