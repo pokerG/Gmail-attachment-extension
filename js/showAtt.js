@@ -406,6 +406,7 @@ function deleteSelect() {
 
 //搜索分页
 function doSearchPage() {
+	var rightSearcgPageNum;
 	selectAllFlag = false;
 	var selBut = document.getElementById('secletAll');
 	selBut.innerHTML = "全选";
@@ -636,13 +637,24 @@ function reshow() {
 	} else {
 		//alert(order);
 		//alert(searchIndex);
-		for (i = 0; i < searchIndex.length - 1; i++) 
-			for (j = i + 1; j < searchIndex.length; j++)
-				if (order.indexOf(searchIndex[i]) > order.indexOf(searchIndex[j]))	{
-					temp = searchIndex[i];
-					searchIndex[i] = searchIndex[j];
-					searchIndex[j] = temp;
-				}
+		if (sortFlag) {
+			for (i = 0; i < searchIndex.length - 1; i++) 
+				for (j = i + 1; j < searchIndex.length; j++)
+					if (order.indexOf(searchIndex[i]) > order.indexOf(searchIndex[j]))	{
+						temp = searchIndex[i];
+						searchIndex[i] = searchIndex[j];
+						searchIndex[j] = temp;
+					}
+		}
+		else {
+			for (i = 0; i < searchIndex.length - 1; i++) 
+				for (j = i + 1; j < searchIndex.length; j++)
+					if (order.indexOf(searchIndex[i]) < order.indexOf(searchIndex[j]))	{
+						temp = searchIndex[i];
+						searchIndex[i] = searchIndex[j];
+						searchIndex[j] = temp;
+					}
+		}
 		//alert(searchIndex);
 		searchPageNum = 0;
 		doSearchPage();
@@ -660,7 +672,7 @@ function reshow() {
 
 function bubbleSort() {
 	var i, j;
-	var temp, string;
+	var temp;
 	for (i = 0; i < sort.length - 1; i++)
 		for (j = i + 1; j < sort.length; j++)
 			if (sort[i].key > sort[j].key) {
@@ -669,10 +681,10 @@ function bubbleSort() {
 				sort[i] = sort[j];
 				sort[j] = temp;
 			}
-			/*var string = '';
-			for (i = 0; i < sort.length; i++)
-				string += sort[i].index + ' ' + sort[i].key + '\n';
-			alert(string);*/
+	/*var string = '';
+	for (i = 0; i < sort.length; i++)
+		string += sort[i].index + ' ' + sort[i].key + '\n';
+	alert(string);*/
 	reshow();
 }
 
