@@ -16,7 +16,7 @@
 
 ####创建草稿&下载文件
 
-你可以使用左侧的按钮来快速下载你选中的附件，使用右侧的按钮来将附件加入最新的草稿中：
+你可以使用左侧的按钮来将选中的附件加入到最新的草稿中，使用右侧的按钮来快速下载选中的附件：
 
 
 ![button](http://gmail-attachment-extension.qiniudn.com/createdownload.jpg)
