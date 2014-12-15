@@ -1,6 +1,6 @@
 #Gmail附件扩展
 
-这是一个让你使用存在于Gmail中的附件来下载或者创建草稿的chrome扩展。
+这是一个让你将Gmail中的附件快速下载到本地或者加入新创建的草稿中的chrome扩展。
 
 [English description](https://github.com/pokerG/Gmail-attachment-extension/blob/master/README.md)
 
@@ -14,13 +14,10 @@
 
 ![list](http://gmail-attachment-extension.qiniudn.com/list.jpg)
 
-####下载文件
+####创建草稿&下载文件
 
-使用这个按钮来快速下载你选中的附件：
+你可以使用左侧的按钮来将选中的附件加入到最新的草稿中，使用右侧的按钮来快速下载选中的附件：
 
-####创建草稿
-
-你可以用这个按钮来轻松创建带有这些附件的草稿：
 
 ![button](http://gmail-attachment-extension.qiniudn.com/createdownload.jpg)
 
