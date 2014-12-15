@@ -180,7 +180,9 @@ function addAtt(att) {
 	var c7 = row.insertCell(7);
 	c0.innerHTML = "<input type='checkbox' name='attCheck'/>";
 	c0.children[0].addEventListener("change", checkAll, false);
-	c2.innerHTML = att.filename;
+	c2.innerHTML = "<a></a>";
+	c2.children[0].innerHTML = att.filename;
+	c2.children[0].addEventListener("click", downloadOne, false);
 	c1.innerHTML = att.type;
 	c7.innerHTML = changeSize(att.size);
 	c3.innerHTML = att.subject;
@@ -210,7 +212,9 @@ function addSel(att) {
 	var c7 = row.insertCell(7);
 	c0.innerHTML = "<input type='checkbox' name='selCheck'/>";
 	c0.children[0].addEventListener("change", checkAllSel, false);
-	c2.innerHTML = att.filename;
+	c2.innerHTML = "<a></a>";
+	c2.children[0].innerHTML = att.filename;
+	c2.children[0].addEventListener("click", downloadOne, false);
 	c1.innerHTML = att.type;
 	c7.innerHTML = changeSize(att.size);
 	c3.innerHTML = att.subject;
@@ -585,6 +589,20 @@ function download() {
 			url: selected[i].url
 		}, function(response) {});
 	}
+}
+
+function downloadOne() {
+	var id = this.parentNode.parentNode.id;
+	if (id[0] == 'a')
+		index = id.split("tt")[1];
+	else 
+		index = id.split("el")[1];
+	index = parseInt(index);
+	chrome.extension.sendMessage({
+			cmd: "download",
+			url: attach[index].url
+	}, function(response) {});
+						
 }
 
 function showKey() {
