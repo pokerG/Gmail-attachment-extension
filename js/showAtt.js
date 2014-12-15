@@ -721,6 +721,9 @@ function doSort(sortKey) {
 		else if (sortKey == 0) {
 			sortNode.key = row.cells[sortKey].children[0].checked;
 		}
+		else if (sortKey == 2) {
+			sortNode.key = row.cells[sortKey].children[0].innerHTML;
+		}
 		sort.push(sortNode);
 	}
 	bubbleSort();
