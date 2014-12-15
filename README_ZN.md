@@ -14,13 +14,10 @@
 
 ![list](http://gmail-attachment-extension.qiniudn.com/list.jpg)
 
-####下载文件
+####创建草稿&下载文件
 
-使用这个按钮来快速下载你选中的附件：
+你可以使用左侧的按钮来快速下载你选中的附件，使用右侧的按钮来将附件加入最新的草稿中：
 
-####创建草稿
-
-你可以用这个按钮来轻松创建带有这些附件的草稿：
 
 ![button](http://gmail-attachment-extension.qiniudn.com/createdownload.jpg)
 
