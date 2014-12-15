@@ -2,6 +2,8 @@
 
 This is a Chrome Extension that allows you to use attachments existed in Gmail to create draft and download.
 
+[中文说明](https://github.com/pokerG/Gmail-attachment-extension/blob/master/README_ZN.md)
+
 ##Features
 
 ####Attachment View
