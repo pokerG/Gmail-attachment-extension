@@ -20,6 +20,7 @@ google.authorize(function() {
 });
 
 var msgs = new Array(); //附件信息,json数组
+var msgs_fetching = new Array(); //获取中的附件信息
 var count = 0; //附件个数
 
 /**
@@ -31,6 +32,7 @@ var count = 0; //附件个数
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   // console.log(message);
   if (message.cmd == "get") {
+  	 fetchList(null, "has:attachment"); //下一次点击按钮时更新
     sendResponse(msgs);
   } else if (message.cmd == "download") {
     chrome.downloads.download({
@@ -45,8 +47,6 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 
 });
 
-var msgList = new Array();
-var attchList = new Array();
 
 /**
  * 获取邮件列表,根据特定条件
@@ -110,8 +110,6 @@ function getMessage(MessageId) {
         var messageObj = JSON.parse(xhr.responseText);
         var parts = messageObj.payload.parts;
 
-        msgList[msgList.length] = messageObj;
-
         //Fetch information of the attachments with a for loop
         if (typeof(parts) != "undefined") {
           for (var i = 0; i < parts.length; i++) {
@@ -119,7 +117,7 @@ function getMessage(MessageId) {
             if (part.body.attachmentId != null && part.filename != "") {
                 if (findheader(part.headers,"Content-Disposition").split(";")[0] == "attachment") {  //filter inline picture
                   file = part.filename.split('.');
-                  msgs[msgs.length] = {
+                  msgs_fetching[msgs_fetching.length] = {
                     msgId: messageObj.id,
                     filename: part.filename,
                     partId: part.partId,
@@ -132,9 +130,9 @@ function getMessage(MessageId) {
                     date: findheader(messageObj.payload.headers, "Date"),
                     size: part.body.size
                   }
-                  chrome.storage.local.set(msgs[msgs.length - 1], function(items) {
+                  /*chrome.storage.local.set(msgs[msgs.length - 1], function(items) {
                     console.log(items);
-                  });
+                  });*/
                   // getAttachment(messageObj.id, part.body.attachmentId);
                   console.log(messageObj);
                 }
