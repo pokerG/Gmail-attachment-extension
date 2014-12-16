@@ -69,6 +69,8 @@ function fetchList(PageToken, q) {
         for (var i = 0; i < list.messages.length; i++) {
           getMessage(list.messages[i].id);
         }
+        msgs = msgs_fetching;
+        msgs_fetching.length = 0;
 
         //递归获取
         /*if (typeof(list.nextPageToken) != "undefined") {
